@@ -14,8 +14,6 @@
             android:label="@string/title_activity_beer_list"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
         <activity
             android:name=".BeerProfileActivity"
             android:label="@string/title_activity_beer_profile"
