@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">BeBeer</string>
     <string name="title_activity_beer_profile">BeerProfileActivity</string>
-
-    <string name="action_settings">Settings</string>
     <string name="title_activity_beer_list">BeerList</string>
+    <string name="action_settings">Settings</string>
     <string name="beer_profile_beer_background_image_desc">Default beer image</string>
+    <string name="beer_list_title">Find your beer</string>
 </resources>

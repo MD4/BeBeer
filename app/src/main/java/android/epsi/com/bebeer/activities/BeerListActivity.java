@@ -1,0 +1,50 @@
+package android.epsi.com.bebeer.activities;
+
+import android.epsi.com.bebeer.R;
+import android.epsi.com.bebeer.adapters.BeerListItemAdapter;
+import android.epsi.com.bebeer.beans.Beer;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BeerListActivity extends AppCompatActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_beer_list);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.beer_list_toolbar);
+        setUpToolbar(toolbar);
+
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.beer_list_recycler);
+        setUpRecyclerView(mRecyclerView);
+    }
+
+    private void setUpToolbar(Toolbar toolbar) {
+        toolbar.setTitle(getResources().getString(R.string.beer_list_title));
+        setSupportActionBar(toolbar);
+    }
+
+    private void setUpRecyclerView(RecyclerView mRecyclerView) {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
+        mRecyclerView.setHasFixedSize(true);
+        RecyclerView.Adapter adapter;
+
+        List<Beer> beers = new ArrayList<>();
+
+        for (int i = 0; i < 15; i++) {
+            beers.add(new Beer("Ma biere " + i));
+        }
+
+        adapter = new BeerListItemAdapter(beers);
+        mRecyclerView.setAdapter(adapter);
+    }
+
+}
