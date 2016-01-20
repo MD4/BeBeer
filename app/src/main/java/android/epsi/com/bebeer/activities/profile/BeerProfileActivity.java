@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,6 +86,10 @@ public class BeerProfileActivity extends AppCompatActivity {
         TextView comment = (TextView) findViewById(R.id.beer_profile_comment);
         TextView fermentation = (TextView) findViewById(R.id.beer_profile_fermentation);
         TextView shortDesc = (TextView) findViewById(R.id.beer_profile_short_description);
+        ImageView image = (ImageView) findViewById(R.id.beer_profile_beer_image);
+
+        new ImageDownloader(image)
+                .execute(beer.getImage());
 
         name.setText(beer.getName());
         country.setText(beer.getCountry());
