@@ -2,16 +2,14 @@ package android.epsi.com.bebeer.activities;
 
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.adapters.BeerListItemAdapter;
-import android.epsi.com.bebeer.beans.Beer;
+import android.epsi.com.bebeer.bean.Beer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BeerListActivity extends AppCompatActivity {
 
@@ -39,14 +37,8 @@ public class BeerListActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
 
         RecyclerView.Adapter adapter;
-        List<Beer> beers = new ArrayList<>();
 
-        for (int i = 0; i < 15; i++) {
-            beers.add(new Beer("Ma biere " + i));
-        }
-
-        Log.i(TAG, "setUpRecyclerView: beers.size = " + beers.size());
-        adapter = new BeerListItemAdapter(beers);
+        adapter = new BeerListItemAdapter(new ArrayList<Beer>());
         mRecyclerView.setAdapter(adapter);
     }
 

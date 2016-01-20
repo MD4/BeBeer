@@ -1,7 +1,7 @@
 package android.epsi.com.bebeer.adapters;
 
 import android.epsi.com.bebeer.R;
-import android.epsi.com.bebeer.beans.Beer;
+import android.epsi.com.bebeer.bean.Beer;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;

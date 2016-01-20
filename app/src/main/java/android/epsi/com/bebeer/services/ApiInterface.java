@@ -6,15 +6,20 @@ import java.util.List;
 
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Path;
+import retrofit.http.Query;
 
 /**
  * Created by fx on 20/01/16.
+ * Represents end-point for our api
  */
 public interface ApiInterface {
 
-    @GET
-    Call<List<Beer>> getBeers();
+    @GET("/beers")
+    Call<List<Beer>> getBeers(@Query("offset") int offset,
+                              @Query("count") int count,
+                              @Query("name") String name);
 
-    @GET
-    Call<Beer> getBeer();
+    @GET("/beers/{id}")
+    Call<Beer> getBeer(@Path("id") String id);
 }
