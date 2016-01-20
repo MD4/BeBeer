@@ -8,12 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BeerListActivity extends AppCompatActivity {
 
+    private static final String TAG = "BeerListActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +37,15 @@ public class BeerListActivity extends AppCompatActivity {
     private void setUpRecyclerView(RecyclerView mRecyclerView) {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
         mRecyclerView.setHasFixedSize(true);
-        RecyclerView.Adapter adapter;
 
+        RecyclerView.Adapter adapter;
         List<Beer> beers = new ArrayList<>();
 
         for (int i = 0; i < 15; i++) {
             beers.add(new Beer("Ma biere " + i));
         }
 
+        Log.i(TAG, "setUpRecyclerView: beers.size = " + beers.size());
         adapter = new BeerListItemAdapter(beers);
         mRecyclerView.setAdapter(adapter);
     }
