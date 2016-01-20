@@ -13,7 +13,7 @@ public class Grades {
     private Double thirsty;
     @SerializedName("bitterness")
     @Expose
-    private Integer bitterness;
+    private Double bitterness;
 
     /**
      * @return The taste
@@ -46,14 +46,14 @@ public class Grades {
     /**
      * @return The bitterness
      */
-    public Integer getBitterness() {
+    public Double getBitterness() {
         return bitterness;
     }
 
     /**
      * @param bitterness The bitterness
      */
-    public void setBitterness(Integer bitterness) {
+    public void setBitterness(Double bitterness) {
         this.bitterness = bitterness;
     }
 

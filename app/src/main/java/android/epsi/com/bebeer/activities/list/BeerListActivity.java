@@ -1,7 +1,7 @@
-package android.epsi.com.bebeer.activities;
+package android.epsi.com.bebeer.activities.list;
 
 import android.epsi.com.bebeer.R;
-import android.epsi.com.bebeer.adapters.BeerListItemAdapter;
+import android.epsi.com.bebeer.activities.list.adapters.BeerListItemAdapter;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.services.ApiClient;
 import android.os.Bundle;
@@ -25,6 +25,11 @@ public class BeerListActivity extends AppCompatActivity {
 
     private static final String TAG = "BeerListActivity";
 
+    /**
+     * Use for passing param to another activity
+     */
+    public static final String EXTRA_BEER_ID = "id";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +39,8 @@ public class BeerListActivity extends AppCompatActivity {
         setUpToolbar(toolbar);
 
         ApiClient apiClient = new ApiClient();
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.beer_list_recycler);
-        setUpRecyclerView(mRecyclerView, apiClient);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.beer_list_recycler);
+        setUpRecyclerView(recyclerView, apiClient);
 
     }
 
@@ -51,21 +56,21 @@ public class BeerListActivity extends AppCompatActivity {
 
     /**
      * Init RecyclerView (~= ListView) related things
-     * @param mRecyclerView
+     * @param recyclerView
      * @param apiClient
      */
-    private void setUpRecyclerView(final RecyclerView mRecyclerView, ApiClient apiClient) {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
-        mRecyclerView.setHasFixedSize(true);
+    private void setUpRecyclerView(final RecyclerView recyclerView, ApiClient apiClient) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        recyclerView.setHasFixedSize(true);
 
-        // API call
+        // API call to fetch data
         apiClient.getBeers().enqueue(new Callback<List<Beer>>() {
             @Override
             public void onResponse(Response<List<Beer>> response, Retrofit retrofit) {
                 if (response.isSuccess()) {
                     // Load data in view
-                    BeerListItemAdapter adapter = new BeerListItemAdapter(response.body());
-                    mRecyclerView.setAdapter(adapter);
+                    BeerListItemAdapter adapter = new BeerListItemAdapter(response.body(), BeerListActivity.this);
+                    recyclerView.setAdapter(adapter);
                 } else {
                     Log.e(TAG, "onResponse: code = " + response.code());
                     Toast.makeText(BeerListActivity.this, getResources().getString(R.string.beer_list_api_error), Toast.LENGTH_SHORT).show();
