@@ -15,12 +15,16 @@ import retrofit.Retrofit;
 
 /**
  * Created by fx on 20/01/16.
- * Client for our web API
+ * Web Service Client for our web API
  */
 public class ApiClient {
 
     private static final String TAG = "ApiClient";
-    private ApiInterface mApi;
+
+    /**
+     * Singleton
+     */
+    private static ApiInterface mApi;
 
     public ApiClient() {
 
@@ -49,7 +53,7 @@ public class ApiClient {
     }
 
     /**
-     * List beers matching request, and paginated
+     * List beers matching request params
      *
      * @param beerRequest Wrapped params
      * @return promise-like object

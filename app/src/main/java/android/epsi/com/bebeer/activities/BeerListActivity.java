@@ -18,6 +18,9 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
+/**
+ * Show list of beers, quick search
+ */
 public class BeerListActivity extends AppCompatActivity {
 
     private static final String TAG = "BeerListActivity";
@@ -36,19 +39,31 @@ public class BeerListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Init toolbar related things
+     *
+     * @param toolbar
+     */
     private void setUpToolbar(Toolbar toolbar) {
         toolbar.setTitle(getResources().getString(R.string.beer_list_title));
         setSupportActionBar(toolbar);
     }
 
+    /**
+     * Init RecyclerView (~= ListView) related things
+     * @param mRecyclerView
+     * @param apiClient
+     */
     private void setUpRecyclerView(final RecyclerView mRecyclerView, ApiClient apiClient) {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
         mRecyclerView.setHasFixedSize(true);
 
+        // API call
         apiClient.getBeers().enqueue(new Callback<List<Beer>>() {
             @Override
             public void onResponse(Response<List<Beer>> response, Retrofit retrofit) {
                 if (response.isSuccess()) {
+                    // Load data in view
                     BeerListItemAdapter adapter = new BeerListItemAdapter(response.body());
                     mRecyclerView.setAdapter(adapter);
                 } else {

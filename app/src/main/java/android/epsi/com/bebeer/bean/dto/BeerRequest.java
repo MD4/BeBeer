@@ -3,6 +3,7 @@ package android.epsi.com.bebeer.bean.dto;
 /**
  * Created by fx on 20/01/16.
  * Wrapper for a full params request
+ * setter are chainable (see corresponding pattern)
  */
 public class BeerRequest {
 

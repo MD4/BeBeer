@@ -4,8 +4,11 @@ import android.epsi.com.bebeer.R;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
 
+/**
+ * Handle beer profile view
+ * TODO: design GUI, handle a Beer and map it to the view
+ */
 public class BeerProfileActivity extends AppCompatActivity {
 
     @Override
@@ -13,9 +16,6 @@ public class BeerProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beer_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
-        TextView commentTv = (TextView) findViewById(R.id.content_beer_comment);
         setSupportActionBar(toolbar);
     }
 
