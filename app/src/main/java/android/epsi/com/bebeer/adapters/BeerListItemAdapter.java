@@ -31,8 +31,10 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerListItemAdapte
 
     @Override
     public void onBindViewHolder(BeerItemViewHolder holder, int position) {
-        TextView textView = (TextView) holder.mItemView.findViewById(R.id.beer_list_beer_card_label);
-        textView.setText(mBeers.get(position).getName());
+        Beer beer = this.mBeers.get(position);
+        holder.nameTv.setText(beer.getName());
+        holder.breweryTv.setText(beer.getBrewery());
+        holder.countryTv.setText(beer.getCountry());
     }
 
     @Override
@@ -42,11 +44,15 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerListItemAdapte
 
     public class BeerItemViewHolder extends RecyclerView.ViewHolder {
 
-        private View mItemView;
+        private TextView nameTv;
+        private TextView breweryTv;
+        private TextView countryTv;
 
         public BeerItemViewHolder(View itemView) {
             super(itemView);
-            mItemView = itemView;
+            nameTv = (TextView) itemView.findViewById(R.id.beer_list_beer_card_name);
+            breweryTv = (TextView) itemView.findViewById(R.id.beer_list_beer_card_brewery);
+            countryTv = (TextView) itemView.findViewById(R.id.beer_list_beer_card_country);
         }
     }
 }

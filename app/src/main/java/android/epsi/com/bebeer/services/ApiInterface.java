@@ -16,10 +16,13 @@ import retrofit.http.Query;
 public interface ApiInterface {
 
     @GET("/beers")
+    Call<List<Beer>> getBeers();
+
+    @GET("/beers")
     Call<List<Beer>> getBeers(@Query("offset") int offset,
                               @Query("count") int count,
                               @Query("name") String name);
 
     @GET("/beers/{id}")
-    Call<Beer> getBeer(@Path("id") String id);
+    Call<Beer> getBeer(@Path("id") int id);
 }

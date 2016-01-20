@@ -1,6 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,23 +14,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="@dimen/beer_list_beer_card_padding">
 
-            <ImageView
-                android:id="@+id/beer_list_beer_card_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxHeight="16dp"
-                android:maxWidth="16dp"
-                android:src="@drawable/beer_default"
-                android:contentDescription="@string/beer_profile_beer_background_image_desc" />
-
             <TextView
-                android:id="@+id/beer_list_beer_card_label"
+                android:id="@+id/beer_list_beer_card_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="place holder" />
+                android:text="Beer Name" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/beer_list_beer_card_brewery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Brewery Name" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/beer_list_beer_card_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Country Name" />
+            </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -2,7 +2,7 @@ package android.epsi.com.bebeer.services;
 
 import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.bean.Beer;
-import android.epsi.com.bebeer.bean.BeerRequest;
+import android.epsi.com.bebeer.bean.dto.BeerRequest;
 import android.util.Log;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -44,7 +44,8 @@ public class ApiClient {
      * @return promise-like object
      */
     public Call<List<Beer>> getBeers() {
-        return getBeers(new BeerRequest());
+        Log.i(TAG, "getBeers() called");
+        return mApi.getBeers();
     }
 
     /**
@@ -64,7 +65,7 @@ public class ApiClient {
      * @param id Id to be looked up
      * @return promise-like object
      */
-    public Call<Beer> getBeer(String id) {
+    public Call<Beer> getBeer(int id) {
         Log.i(TAG, "getBeer() called with: " + "id = [" + id + "]");
         return mApi.getBeer(id);
     }

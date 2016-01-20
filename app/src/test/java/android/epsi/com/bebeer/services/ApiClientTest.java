@@ -1,7 +1,7 @@
 package android.epsi.com.bebeer.services;
 
 import android.epsi.com.bebeer.bean.Beer;
-import android.test.suitebuilder.annotation.MediumTest;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,13 +14,12 @@ import retrofit.Response;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
 /**
  * Created by fx on 20/01/16.
  */
-@MediumTest
+@SmallTest
 public class ApiClientTest {
 
     private ApiClient mApiClient;
@@ -46,7 +45,6 @@ public class ApiClientTest {
     public void testGetBeers() throws IOException {
 
         Response<List<Beer>> resp = mApiClient.getBeers().execute();
-
         assertThat(
                 "request should have succeed",
                 resp.isSuccess(),
@@ -62,8 +60,31 @@ public class ApiClientTest {
         assertThat(
                 "beer list count should be > 0",
                 resp.body().size(),
-                greaterThan(0)
+                is(20)
+        );
+    }
+
+    @Test
+    public void testGetBeer() throws IOException {
+        int testId = 1509;
+        Response<Beer> resp = mApiClient.getBeer(testId).execute();
+
+        assertThat(
+                "request should have succeed",
+                resp.isSuccess(),
+                is(true)
         );
 
+        assertThat(
+                "beer should not be empty",
+                resp.body(),
+                not(nullValue())
+        );
+
+        assertThat(
+                "beer retrieved has the good id",
+                resp.body().getId(),
+                is(testId)
+        );
     }
 }

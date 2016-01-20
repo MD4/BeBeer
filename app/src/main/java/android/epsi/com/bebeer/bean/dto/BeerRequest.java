@@ -1,7 +1,8 @@
-package android.epsi.com.bebeer.bean;
+package android.epsi.com.bebeer.bean.dto;
 
 /**
  * Created by fx on 20/01/16.
+ * Wrapper for a full params request
  */
 public class BeerRequest {
 
@@ -16,24 +17,27 @@ public class BeerRequest {
         return offset;
     }
 
-    public void setOffset(int offset) {
+    public BeerRequest setOffset(int offset) {
         this.offset = offset;
+        return this;
     }
 
     public int getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public BeerRequest setCount(int count) {
         this.count = count;
+        return this;
     }
 
     public String getRequestByName() {
         return requestByName;
     }
 
-    public void setRequestByName(String requestByName) {
+    public BeerRequest setRequestByName(String requestByName) {
         this.requestByName = requestByName;
+        return this;
     }
 
     @Override
