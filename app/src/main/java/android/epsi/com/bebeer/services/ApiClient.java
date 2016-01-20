@@ -1,6 +1,5 @@
 package android.epsi.com.bebeer.services;
 
-import android.content.Context;
 import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.BeerRequest;
@@ -23,7 +22,7 @@ public class ApiClient {
     private static final String TAG = "ApiClient";
     private ApiInterface mApi;
 
-    public ApiClient(Context ctx) {
+    public ApiClient() {
 
         // Build our client if not already build
         if (mApi == null) {
