@@ -6,6 +6,7 @@ import android.epsi.com.bebeer.activities.list.BeerListActivity;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.services.ApiClient;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,7 +30,7 @@ public class BeerProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beer_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.beer_profile_toolbar);
         setSupportActionBar(toolbar);
 
         ApiClient apiClient = new ApiClient();
@@ -80,7 +81,7 @@ public class BeerProfileActivity extends AppCompatActivity {
      * @param beer
      */
     private void bindBeerToView(Beer beer) {
-        TextView name = (TextView) findViewById(R.id.beer_profile_name);
+        CollapsingToolbarLayout toolbarName = (CollapsingToolbarLayout) findViewById(R.id.beer_profile_toolbar_layout);
         TextView country = (TextView) findViewById(R.id.beer_profile_country);
         TextView brewery = (TextView) findViewById(R.id.beer_profile_brewery);
         TextView comment = (TextView) findViewById(R.id.beer_profile_comment);
@@ -91,7 +92,7 @@ public class BeerProfileActivity extends AppCompatActivity {
         new ImageDownloader(image)
                 .execute(beer.getImage());
 
-        name.setText(beer.getName());
+        toolbarName.setTitle(beer.getName());
         country.setText(beer.getCountry());
         brewery.setText(beer.getBrewery());
         comment.setText(beer.getComment());
