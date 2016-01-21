@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,6 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
     private final ApiClient mApiClient;
     private static final String TAG = "BeerListItemAdapter";
 
-    private int mOffset;
     private int mCount;
 
     /**
@@ -50,48 +48,55 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
         mApiClient = new ApiClient();
         mActivity = activity;
         mBeers = new ArrayList<>();
-        mOffset = 0;
         mCount = 20;
 
-        setUpData(mOffset, mCount);
+        // Starting from 0, loading 20 items each request
+        setUpData(0, mCount, null);
     }
 
     /**
-     * Fetch data
+     * Fetch data, paginated
      *
      * @param offset
      * @param count
+     * @param holder
      */
-    private void setUpData(final int offset, int count) {
+    private void setUpData(final int offset, int count, final BeerItemViewHolder holder) {
         Log.i(TAG, "setUpData() called with: " + "offset = [" + offset + "], count = [" + count + "]");
         mApiClient.getBeers(offset, count)
                 .enqueue(new Callback<List<Beer>>() {
                     @Override
                     public void onResponse(Response<List<Beer>> response, Retrofit retrofit) {
+
+                        if (holder != null) {
+                            holder.getLoader().setVisibility(View.GONE);
+                        }
+
                         if (response.isSuccess()) {
                             mBeers.addAll(response.body());
                             Log.i(TAG, "onResponse: beers size = " + mBeers.size());
                             BeerListItemAdapter.this.notifyDataSetChanged();
                         } else {
-                            try {
-                                Log.e(TAG, String.format("onResponse: error while fetching beers: %d, %s", response.code(), response.errorBody().string()));
-                            } catch (IOException e) {
-
-                            }
+                            Log.e(TAG, String.format("onResponse: error while fetching beers: code = %d", response.code()));
                         }
                     }
 
                     @Override
                     public void onFailure(Throwable t) {
                         Log.e(TAG, "onFailure: can't fetch beers :(", t);
+                        if (holder != null) {
+                            holder.getLoader().setVisibility(View.GONE);
+                        }
                     }
+
                 });
     }
 
 
     /**
      * Inflate a view component if necesary
-     * @param parent Parent view
+     *
+     * @param parent   Parent view
      * @param viewType Not used for the moment (see RecyclerView doc)
      * @return View holder
      */
@@ -104,14 +109,15 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
 
     /**
      * Map a beer to an existing view holder
-     * @param holder Existing view holder
+     *
+     * @param holder   Existing view holder
      * @param position Item's position
      */
     @Override
     public void onBindViewHolder(BeerItemViewHolder holder, int position) {
-        Log.i(TAG, "onBindViewHolder: position = " + position + ", mBeers.size() = " + mBeers.size());
         if (position == (mBeers.size() - 1)) {
-            setUpData(position + 1, mCount);
+            holder.getLoader().setVisibility(View.VISIBLE);
+            setUpData(position + 1, mCount, holder);
         }
         Beer beer = this.mBeers.get(position);
         holder.setBeer(beer);

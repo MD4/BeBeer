@@ -9,6 +9,7 @@ import android.epsi.com.bebeer.bean.Beer;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
@@ -30,6 +31,7 @@ public class BeerItemViewHolder extends RecyclerView.ViewHolder implements View.
     private Beer mBeer;
 
     private Activity mActivity;
+    private ProgressBar mLoader;
 
     public BeerItemViewHolder(View itemView, Activity activity) {
         super(itemView);
@@ -40,6 +42,7 @@ public class BeerItemViewHolder extends RecyclerView.ViewHolder implements View.
         mName = (TextView) itemView.findViewById(R.id.beer_list_beer_card_name);
         mBrewery = (TextView) itemView.findViewById(R.id.beer_list_beer_card_brewery);
         mCountry = (TextView) itemView.findViewById(R.id.beer_list_beer_card_country);
+        mLoader = (ProgressBar) itemView.findViewById(R.id.beer_profile_card_loader);
 
         // Register event
         itemView.setOnClickListener(this);
@@ -74,5 +77,9 @@ public class BeerItemViewHolder extends RecyclerView.ViewHolder implements View.
 
     public void setBeer(Beer beer) {
         this.mBeer = beer;
+    }
+
+    public ProgressBar getLoader() {
+        return mLoader;
     }
 }
