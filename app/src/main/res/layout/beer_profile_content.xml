@@ -118,6 +118,7 @@
                     android:layout_height="wrap_content" />
 
                 <ImageView
+                    android:id="@+id/beer_profile_share_btn"
                     android:layout_width="@dimen/beer_profile_share_width"
                     android:layout_height="@dimen/beer_profile_share_height"
                     android:background="@drawable/ic_share_black_24dp"

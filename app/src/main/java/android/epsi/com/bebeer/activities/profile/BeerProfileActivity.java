@@ -10,6 +10,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,23 @@ public class BeerProfileActivity extends AppCompatActivity {
     }
 
     /**
+     * @param shareBtn
+     * @param beer
+     */
+    private void setUpShareBtn(ImageView shareBtn, Beer beer) {
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
+    }
+
+    /**
      * Set up view with given intent
      *
      * @param intent    Intent containing beer.id to look for
@@ -60,6 +78,8 @@ public class BeerProfileActivity extends AppCompatActivity {
                         if (response.isSuccess()) {
                             Beer beer = response.body();
                             bindBeerToView(beer);
+                            ImageView shareBtn = (ImageView) findViewById(R.id.beer_profile_share_btn);
+                            setUpShareBtn(shareBtn, beer);
                         } else {
                             Log.e(TAG, String.format("onResponse: can't get Beer(%d)", beerId));
                             Toast.makeText(BeerProfileActivity.this, R.string.beer_profile_error_api, Toast.LENGTH_SHORT).show();
