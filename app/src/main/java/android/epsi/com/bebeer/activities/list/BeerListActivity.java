@@ -56,7 +56,9 @@ public class BeerListActivity extends AppCompatActivity {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                search.setText("");
+                if (search.getText().length() > 0) {
+                    search.setText("");
+                }
             }
         });
         search.addTextChangedListener(new TextWatcher() {
