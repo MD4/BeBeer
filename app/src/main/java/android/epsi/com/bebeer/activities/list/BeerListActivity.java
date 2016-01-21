@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 
 /**
  * Show list of beers, quick search
+ * TODO Add search field, and improve design
  */
 public class BeerListActivity extends AppCompatActivity {
 

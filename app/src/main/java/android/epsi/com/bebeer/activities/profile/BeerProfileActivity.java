@@ -20,7 +20,7 @@ import retrofit.Retrofit;
 
 /**
  * Handle beer profile view
- * TODO: design GUI, handle a Beer and map it to the view
+ * TODO: design a better GUI
  */
 public class BeerProfileActivity extends AppCompatActivity {
 
@@ -89,6 +89,7 @@ public class BeerProfileActivity extends AppCompatActivity {
         TextView shortDesc = (TextView) findViewById(R.id.beer_profile_short_description);
         ImageView image = (ImageView) findViewById(R.id.beer_profile_beer_image);
 
+        // TODO Caching image?
         new ImageDownloader(image)
                 .execute(beer.getImage());
 
