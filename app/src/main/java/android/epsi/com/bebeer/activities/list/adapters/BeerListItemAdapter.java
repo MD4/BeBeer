@@ -62,7 +62,7 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
      * @param offset
      * @param count
      */
-    private void setUpData(int offset, int count) {
+    private void setUpData(final int offset, int count) {
         Log.i(TAG, "setUpData() called with: " + "offset = [" + offset + "], count = [" + count + "]");
         mApiClient.getBeers(offset, count)
                 .enqueue(new Callback<List<Beer>>() {
@@ -70,6 +70,7 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
                     public void onResponse(Response<List<Beer>> response, Retrofit retrofit) {
                         if (response.isSuccess()) {
                             mBeers.addAll(response.body());
+                            Log.i(TAG, "onResponse: beers size = " + mBeers.size());
                             BeerListItemAdapter.this.notifyDataSetChanged();
                         } else {
                             try {
@@ -108,8 +109,9 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
      */
     @Override
     public void onBindViewHolder(BeerItemViewHolder holder, int position) {
+        Log.i(TAG, "onBindViewHolder: position = " + position + ", mBeers.size() = " + mBeers.size());
         if (position == (mBeers.size() - 1)) {
-            setUpData(position - 1, mCount);
+            setUpData(position + 1, mCount);
         }
         Beer beer = this.mBeers.get(position);
         holder.setBeer(beer);
