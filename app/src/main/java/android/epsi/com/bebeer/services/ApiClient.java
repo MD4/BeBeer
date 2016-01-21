@@ -2,7 +2,6 @@ package android.epsi.com.bebeer.services;
 
 import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.bean.Beer;
-import android.epsi.com.bebeer.bean.dto.BeerRequest;
 import android.util.Log;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -43,24 +42,24 @@ public class ApiClient {
     }
 
     /**
-     * List beers with default params
-     *
-     * @return promise-like object
+     * List beers, paginated without search query
+     * @param offset
+     * @param count
+     * @return
      */
-    public Call<List<Beer>> getBeers() {
-        Log.i(TAG, "getBeers() called");
-        return mApi.getBeers();
+    public Call<List<Beer>> getBeers(int offset, int count) {
+        Log.i(TAG, "getBeers() called with: " + "offset = [" + offset + "], count = [" + count + "]");
+        return mApi.getBeers(offset, count);
     }
 
     /**
-     * List beers matching request params
+     * List beers, paginated with search query
      *
-     * @param beerRequest Wrapped params
      * @return promise-like object
      */
-    public Call<List<Beer>> getBeers(BeerRequest beerRequest) {
-        Log.i(TAG, "getBeers() called with: " + "beerRequest = [" + beerRequest + "]");
-        return mApi.getBeers(beerRequest.getOffset(), beerRequest.getCount(), beerRequest.getRequestByName());
+    public Call<List<Beer>> getBeers(int offset, int count, String name) {
+        Log.i(TAG, "getBeers() called with: " + "offset = [" + offset + "], count = [" + count + "], name = [" + name + "]");
+        return mApi.getBeers(offset, count, name);
     }
 
     /**

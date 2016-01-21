@@ -44,7 +44,7 @@ public class ApiClientTest {
     @Test
     public void testGetBeers() throws IOException {
 
-        Response<List<Beer>> resp = mApiClient.getBeers().execute();
+        Response<List<Beer>> resp = mApiClient.getBeers(20, 0).execute();
         assertThat(
                 "request should have succeed",
                 resp.isSuccess(),
@@ -65,7 +65,30 @@ public class ApiClientTest {
     }
 
     @Test
-    public void testGetBeer() throws IOException {
+    public void testGetBeersCounted() throws IOException {
+
+        Response<List<Beer>> resp = mApiClient.getBeers(0, 30).execute();
+        assertThat(
+                "request should have succeed",
+                resp.isSuccess(),
+                is(true)
+        );
+
+        assertThat(
+                "beer list should not be empty",
+                resp.body(),
+                not(nullValue())
+        );
+
+        assertThat(
+                "beer list count should be > 0",
+                resp.body().size(),
+                is(30)
+        );
+    }
+
+    @Test
+    public void testGetBeerWithSearch() throws IOException {
         int testId = 1509;
         Response<Beer> resp = mApiClient.getBeer(testId).execute();
 
