@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.EditText;
 
 /**
  * Show list of beers, quick search
@@ -29,9 +30,24 @@ public class BeerListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.beer_list_toolbar);
         setUpToolbar(toolbar);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.beer_list_recycler);
-        setUpRecyclerView(recyclerView);
+        BeerListItemAdapter beerListItemAdapter = new BeerListItemAdapter(this);
 
+        EditText search = (EditText) findViewById(R.id.beer_list_search_view);
+        setUpSearchView(search, beerListItemAdapter);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.beer_list_recycler);
+        setUpRecyclerView(recyclerView, beerListItemAdapter);
+
+    }
+
+    /**
+     * Configure search field
+     *
+     * @param search
+     * @param beerListItemAdapter
+     */
+    private void setUpSearchView(EditText search, BeerListItemAdapter beerListItemAdapter) {
+        search.addTextChangedListener(beerListItemAdapter);
     }
 
     /**
@@ -47,11 +63,12 @@ public class BeerListActivity extends AppCompatActivity {
     /**
      * Init RecyclerView (~= ListView) related things
      * @param recyclerView
+     * @param beerListItemAdapter
      */
-    private void setUpRecyclerView(final RecyclerView recyclerView) {
+    private void setUpRecyclerView(final RecyclerView recyclerView, BeerListItemAdapter beerListItemAdapter) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new BeerListItemAdapter(this));
+        recyclerView.setAdapter(beerListItemAdapter);
     }
 
 }
