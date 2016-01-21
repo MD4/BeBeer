@@ -25,7 +25,7 @@ import retrofit.Retrofit;
  * Adapter for the recycler view (list)
  * Handle pagination for beer lis
  */
-public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder> implements TextWatcher {
+public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder> implements TextWatcher, View.OnClickListener {
 
     private final ApiClient mApiClient;
     private static final String TAG = "BeerListItemAdapter";
@@ -163,5 +163,18 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+    /**
+     * Reset search query
+     *
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        mSearch = null;
+        mBeers.clear();
+        notifyDataSetChanged();
+        setUpData(0, 20, null, null);
     }
 }

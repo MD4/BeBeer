@@ -52,7 +52,8 @@
                     android:layout_gravity="center"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:src="@drawable/ic_search_white_24dp" />
+                    android:src="@drawable/ic_search_white_24dp"
+                    android:foreground="?android:attr/selectableItemBackground" />
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
 

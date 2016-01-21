@@ -7,7 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 /**
  * Show list of beers, quick search
@@ -33,7 +37,8 @@ public class BeerListActivity extends AppCompatActivity {
         BeerListItemAdapter beerListItemAdapter = new BeerListItemAdapter(this);
 
         EditText search = (EditText) findViewById(R.id.beer_list_search_view);
-        setUpSearchView(search, beerListItemAdapter);
+        ImageView searchBtn = (ImageView) findViewById(R.id.beer_list_search_clear);
+        setUpSearchView(search, beerListItemAdapter, searchBtn);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.beer_list_recycler);
         setUpRecyclerView(recyclerView, beerListItemAdapter);
@@ -42,12 +47,38 @@ public class BeerListActivity extends AppCompatActivity {
 
     /**
      * Configure search field
-     *
-     * @param search
+     *  @param search
      * @param beerListItemAdapter
+     * @param searchBtn
      */
-    private void setUpSearchView(EditText search, BeerListItemAdapter beerListItemAdapter) {
+    private void setUpSearchView(final EditText search, final BeerListItemAdapter beerListItemAdapter, final ImageView searchBtn) {
         search.addTextChangedListener(beerListItemAdapter);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search.setText("");
+            }
+        });
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 0) {
+                    searchBtn.setImageResource(R.drawable.ic_clear_white_24dp);
+                } else {
+                    searchBtn.setImageResource(R.drawable.ic_search_white_24dp);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     /**
@@ -70,5 +101,4 @@ public class BeerListActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(beerListItemAdapter);
     }
-
 }
