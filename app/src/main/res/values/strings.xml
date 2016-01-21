@@ -6,7 +6,12 @@
     <string name="beer_profile_beer_background_image_desc">Default beer image</string>
     <string name="beer_list_title">Find your beer</string>
     <string name="beer_list_api_error">Can\'t get beers, try later!</string>
-    <string name="beer_profile_no_id">An error occured</string>
+    <string name="beer_profile_no_id">An error occurred</string>
     <string name="beer_profile_error_api">Can\'t fetch this beer, sorry</string>
     <string name="beer_list_search_label">Search</string>
+    <string name="beer_country">Country: </string>
+    <string name="beer_brewery">Brewery: </string>
+    <string name="beer_comment">Comment: </string>
+    <string name="beer_fermentation">Fermentation: </string>
+    <string name="beer_desc">Description: </string>
 </resources>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.services.ApiClient;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,6 +43,8 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
      */
     private Activity mActivity;
     private String mSearch;
+    private Handler mSearchHandler;
+    private Runnable mSearchRunnable;
 
     /**
      * Simple constructor
@@ -53,6 +56,7 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
         mActivity = activity;
         mBeers = new ArrayList<>();
         mCount = 20;
+        mSearchHandler = new Handler();
 
         // Starting from 0, loading 20 items each request
         setUpData(0, mCount, null, null);
@@ -152,12 +156,27 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
     }
 
     @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
+    public void onTextChanged(final CharSequence s, int start, int before, int count) {
         Log.i(TAG, "onTextChanged() called with: " + "s = [" + s + "], start = [" + start + "], before = [" + before + "], count = [" + count + "]");
-        mSearch = s.toString();
-        mBeers.clear();
-        notifyDataSetChanged();
-        setUpData(0, 20, s.toString(), null);
+
+        if (mSearchRunnable != null) {
+            mSearchHandler.removeCallbacks(mSearchRunnable);
+        }
+
+        mSearchRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                mSearch = s.toString();
+                mBeers.clear();
+                notifyDataSetChanged();
+                setUpData(0, 20, s.toString(), null);
+                mSearchRunnable = null;
+
+            }
+        };
+        mSearchHandler.postDelayed(mSearchRunnable, 350);
+
     }
 
     @Override
