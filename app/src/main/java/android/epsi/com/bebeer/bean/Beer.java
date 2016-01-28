@@ -31,7 +31,7 @@ public class Beer {
     private Grades grades;
     @SerializedName("notes")
     @Expose
-    private List<String> notes = new ArrayList<String>();
+    private List<String> notes = new ArrayList<>();
     @SerializedName("fermentation")
     @Expose
     private String fermentation;

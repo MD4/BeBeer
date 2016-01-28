@@ -9,4 +9,5 @@
     <dimen name="beer_list_toolbar_margin_top">10dp</dimen>
     <dimen name="beer_profile_share_width">24dp</dimen>
     <dimen name="beer_profile_share_height">24dp</dimen>
+    <dimen name="beer_list_search_field_padding_horizontal">2dp</dimen>
 </resources>

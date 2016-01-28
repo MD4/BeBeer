@@ -40,7 +40,8 @@
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:paddingLeft="2dp"
+                    android:paddingStart="@dimen/beer_list_search_field_padding_horizontal"
+                    android:paddingEnd="@dimen/beer_list_search_field_padding_horizontal"
                     android:singleLine="true"
                     android:textColor="#ffffff"
                     android:textColorHint="#b3ffffff" />
@@ -53,7 +54,8 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:src="@drawable/ic_search_white_24dp"
-                    android:foreground="?android:attr/selectableItemBackground" />
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:contentDescription="@string/beer_list_search_clear_cd" />
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
 

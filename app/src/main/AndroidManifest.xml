@@ -23,7 +23,7 @@
         <activity
             android:name=".activities.profile.BeerProfileActivity"
             android:label="@string/title_activity_beer_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

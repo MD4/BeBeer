@@ -31,19 +31,19 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
     private final ApiClient mApiClient;
     private static final String TAG = "BeerListItemAdapter";
 
-    private int mCount;
+    private final int mCount;
 
     /**
      * Data set
      */
-    private List<Beer> mBeers;
+    private final List<Beer> mBeers;
 
     /**
      * Context
      */
-    private Activity mActivity;
+    private final Activity mActivity;
     private String mSearch;
-    private Handler mSearchHandler;
+    private final Handler mSearchHandler;
     private Runnable mSearchRunnable;
 
     /**

@@ -13,7 +13,7 @@ import retrofit.http.Query;
  * Created by fx on 20/01/16.
  * Represents end-point for our api
  */
-public interface ApiInterface {
+interface ApiInterface {
 
     @GET("/beers")
     Call<List<Beer>> getBeers(@Query("offset") int offset,

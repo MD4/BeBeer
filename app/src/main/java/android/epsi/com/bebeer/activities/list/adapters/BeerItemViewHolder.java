@@ -21,17 +21,17 @@ public class BeerItemViewHolder extends RecyclerView.ViewHolder implements View.
     /**
      * Beer card view labels
      */
-    private TextView mName;
-    private TextView mBrewery;
-    private TextView mCountry;
+    private final TextView mName;
+    private final TextView mBrewery;
+    private final TextView mCountry;
 
     /**
      * Remember the beer we are displaying (usefull for event handling)
      */
     private Beer mBeer;
 
-    private Activity mActivity;
-    private ProgressBar mLoader;
+    private final Activity mActivity;
+    private final ProgressBar mLoader;
 
     public BeerItemViewHolder(View itemView, Activity activity) {
         super(itemView);

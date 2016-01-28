@@ -12,11 +12,11 @@ import java.io.InputStream;
  * Created by fx on 21/01/2016.
  * Download an image and display it on a view
  */
-public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
+class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
     private static final String TAG = "ImageDownloader";
 
-    private ImageView mImageView;
+    private final ImageView mImageView;
 
     /**
      * View to put the image into
