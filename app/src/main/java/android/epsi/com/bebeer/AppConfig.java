@@ -6,5 +6,5 @@ package android.epsi.com.bebeer;
  */
 public interface AppConfig {
 
-    String API_BASE_URL = "http://beers.fxhibon.fr";
+    String API_BASE_URL = "https://bebeer.cleverapps.io/";
 }

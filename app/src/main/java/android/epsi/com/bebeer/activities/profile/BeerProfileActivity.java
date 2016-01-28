@@ -5,6 +5,7 @@ import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.activities.list.BeerListActivity;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.services.ApiClient;
+import android.epsi.com.bebeer.services.image.ApiImageAccessor;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -21,11 +22,13 @@ import retrofit.Retrofit;
 
 /**
  * Handle beer profile view
- * TODO: design a better GUI
+ * TODO: design a prettier GUI
  */
 public class BeerProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "BeerProfileActivity";
+
+    private ApiImageAccessor mAmiImageAccessor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class BeerProfileActivity extends AppCompatActivity {
 
         ApiClient apiClient = new ApiClient();
         setUpBeerView(getIntent(), apiClient);
+
+        mAmiImageAccessor = ApiImageAccessor.getInstance();
     }
 
     /**
@@ -110,8 +115,7 @@ public class BeerProfileActivity extends AppCompatActivity {
         ImageView image = (ImageView) findViewById(R.id.beer_profile_beer_image);
 
         // TODO Caching image?
-        new ImageDownloader(image)
-                .execute(beer.getImage());
+        mAmiImageAccessor.displayImageToView(image, beer.getImage());
 
         toolbarName.setTitle(beer.getName());
         country.setText(beer.getCountry());
