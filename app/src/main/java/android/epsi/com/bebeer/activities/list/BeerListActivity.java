@@ -15,7 +15,6 @@ import android.widget.ImageView;
 
 /**
  * Show list of beers, quick search
- * TODO Add search field, and improve design
  */
 public class BeerListActivity extends AppCompatActivity {
 
