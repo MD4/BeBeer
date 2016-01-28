@@ -18,21 +18,21 @@ public class ApiImageAccessor {
     private static final String TAG = "ApiImageAccessor";
 
     private static ApiImageAccessor mInstance = new ApiImageAccessor();
-    private final LruCache<String, Bitmap> mLruCache;
-
-    public static ApiImageAccessor getInstance() {
-        return mInstance;
-    }
+    private final LruCache<String, Bitmap> mCache;
 
     private ApiImageAccessor() {
         int maxMemory = (int) (Runtime.getRuntime().maxMemory());
         int size = maxMemory / 8;
-        mLruCache = new LruCache<String, Bitmap>(size) {
+        mCache = new LruCache<String, Bitmap>(size) {
             @Override
             protected int sizeOf(String key, Bitmap value) {
                 return value.getByteCount() / 1024;
             }
         };
+    }
+
+    public static ApiImageAccessor getInstance() {
+        return mInstance;
     }
 
     /**
@@ -60,7 +60,7 @@ public class ApiImageAccessor {
      * @param bitmap
      */
     private void addBitmapToCache(String id, Bitmap bitmap) {
-        mLruCache.put(id, bitmap);
+        mCache.put(id, bitmap);
     }
 
     /**
@@ -70,9 +70,12 @@ public class ApiImageAccessor {
      * @return Bitmap or null
      */
     private Bitmap getBitmapFromCache(String id) {
-        return mLruCache.get(id);
+        return mCache.get(id);
     }
 
+    /**
+     * Async task: download an image and add it to the cache
+     */
     private class AsyncCacheLoader extends AsyncTask<String, Void, Bitmap> {
 
         private final ImageView mView;
@@ -97,8 +100,10 @@ public class ApiImageAccessor {
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            mView.setImageBitmap(bitmap);
-            addBitmapToCache(mUrl, bitmap);
+            if (bitmap != null) {
+                mView.setImageBitmap(bitmap);
+                addBitmapToCache(mUrl, bitmap);
+            }
         }
     }
 }
