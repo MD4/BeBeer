@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.activities.list.BeerListActivity;
 import android.epsi.com.bebeer.bean.Beer;
-import android.epsi.com.bebeer.services.ApiClient;
 import android.epsi.com.bebeer.services.image.ApiImageAccessor;
+import android.epsi.com.bebeer.services.remote.ApiClient;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -44,17 +44,18 @@ public class BeerProfileActivity extends AppCompatActivity {
     }
 
     /**
+     * TODO implement it
+     *
      * @param shareBtn
      * @param beer
      */
-    private void setUpShareBtn(ImageView shareBtn, Beer beer) {
+    private void setUpShareBtn(ImageView shareBtn, final Beer beer) {
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-                sendIntent.setType("text/plain");
+//                sendIntent.setD("https://bebeer.cleverapps.io/beers/" + beer.getId());
                 startActivity(sendIntent);
             }
         });
@@ -67,11 +68,12 @@ public class BeerProfileActivity extends AppCompatActivity {
      * @param apiClient
      */
     private void setUpBeerView(Intent intent, ApiClient apiClient) {
-        final int beerId = intent.getIntExtra(BeerListActivity.EXTRA_BEER_ID, -1);
+        final int beerId = parseIntent(intent);
 
         if (beerId == -1) {
             Log.e(TAG, "setUpBeerView: no beer id found in extra");
             Toast.makeText(BeerProfileActivity.this, getResources().getString(R.string.beer_profile_no_id), Toast.LENGTH_SHORT).show();
+            return;
         }
 
         // Fetch the beer!
@@ -98,6 +100,25 @@ public class BeerProfileActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    /**
+     * Parse itent to retrieve beer id if found
+     *
+     * @param intent Intent of this activity
+     * @return Beer id if found, else -1
+     */
+    private int parseIntent(Intent intent) {
+        int beerId = intent.getIntExtra(BeerListActivity.EXTRA_BEER_ID, -1);
+        if (beerId == -1 && intent.getData() != null) {
+            String segment = intent.getData().getLastPathSegment();
+            try {
+                beerId = Integer.parseInt(segment);
+            } catch (NumberFormatException e) {
+                beerId = -1;
+            }
+        }
+        return beerId;
     }
 
     /**

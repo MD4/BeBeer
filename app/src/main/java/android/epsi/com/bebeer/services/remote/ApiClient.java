@@ -1,4 +1,4 @@
-package android.epsi.com.bebeer.services;
+package android.epsi.com.bebeer.services.remote;
 
 import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.bean.Beer;

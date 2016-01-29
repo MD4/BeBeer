@@ -3,7 +3,7 @@ package android.epsi.com.bebeer.activities.list.adapters;
 import android.app.Activity;
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.bean.Beer;
-import android.epsi.com.bebeer.services.ApiClient;
+import android.epsi.com.bebeer.services.remote.ApiClient;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -28,9 +28,8 @@ import retrofit.Retrofit;
  */
 public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder> implements TextWatcher, View.OnClickListener {
 
-    private final ApiClient mApiClient;
     private static final String TAG = "BeerListItemAdapter";
-
+    private final ApiClient mApiClient;
     private final int mCount;
 
     /**
@@ -42,8 +41,8 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
      * Context
      */
     private final Activity mActivity;
-    private String mSearch;
     private final Handler mSearchHandler;
+    private String mSearch;
     private Runnable mSearchRunnable;
 
     /**
