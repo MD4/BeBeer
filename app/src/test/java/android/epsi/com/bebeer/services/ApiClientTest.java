@@ -1,6 +1,7 @@
 package android.epsi.com.bebeer.services;
 
 import android.epsi.com.bebeer.bean.Beer;
+import android.epsi.com.bebeer.bean.Brewery;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import org.junit.Before;
@@ -14,6 +15,7 @@ import retrofit.Response;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -44,7 +46,7 @@ public class ApiClientTest {
     @Test
     public void testGetBeers() throws IOException {
 
-        Response<List<Beer>> resp = mApiClient.getBeers(20, 0).execute();
+        Response<List<Beer>> resp = mApiClient.getBeers(0, 20).execute();
         assertThat(
                 "request should have succeed",
                 resp.isSuccess(),
@@ -105,9 +107,85 @@ public class ApiClientTest {
         );
 
         assertThat(
-                "beer retrieved has the good id",
+                "beer retrieved has the right id",
                 resp.body().getId(),
                 is(testId)
+        );
+    }
+
+    @Test
+    public void testGetBreweries() throws IOException {
+        Response<List<Brewery>> response = mApiClient.getBreweries(0, 20).execute();
+
+        assertThat(
+                "Request should have succeed",
+                response.isSuccess(),
+                is(true)
+        );
+
+        assertThat(
+                "Body is not null",
+                response.body(),
+                not(nullValue())
+        );
+
+        assertThat(
+                "There is 20 breweries",
+                response.body().size(),
+                is(20)
+        );
+    }
+
+    @Test
+    public void testGetBreweriesCounted() throws IOException {
+        Response<List<Brewery>> response = mApiClient.getBreweries(0, 30).execute();
+
+        assertThat(
+                "Request should have succeed",
+                response.isSuccess(),
+                is(true)
+        );
+
+        assertThat(
+                "Body is not null",
+                response.body(),
+                not(nullValue())
+        );
+
+        assertThat(
+                "There is 30 breweries",
+                response.body().size(),
+                is(30)
+        );
+    }
+
+    @Test
+    public void testGetBreweriesSearch() throws IOException {
+        String query = "Bracki";
+        Response<List<Brewery>> response = mApiClient.getBreweries(0, 20, query).execute();
+
+        assertThat(
+                "Request should have succeed",
+                response.isSuccess(),
+                is(true)
+        );
+
+        assertThat(
+                "Body is not null",
+                response.body(),
+                not(nullValue())
+        );
+
+        assertThat(
+                "There is 1 matching result",
+                response.body().size(),
+                is(1)
+        );
+
+        assertThat(
+                "Retrieved brewery has the correct name",
+                response.body().get(0).getName(),
+                startsWith(query)
         );
     }
 }

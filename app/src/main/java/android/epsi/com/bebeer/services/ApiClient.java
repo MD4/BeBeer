@@ -2,6 +2,7 @@ package android.epsi.com.bebeer.services;
 
 import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.bean.Beer;
+import android.epsi.com.bebeer.bean.Brewery;
 import android.util.Log;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -73,4 +74,11 @@ public class ApiClient {
         return mApi.getBeer(id);
     }
 
+    public Call<List<Brewery>> getBreweries(int offset, int count) {
+        return mApi.getBreweries(offset, count);
+    }
+
+    public Call<List<Brewery>> getBreweries(int offset, int count, String query) {
+        return mApi.getBreweries(offset, count, query);
+    }
 }

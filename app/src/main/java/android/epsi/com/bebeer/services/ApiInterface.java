@@ -1,6 +1,7 @@
 package android.epsi.com.bebeer.services;
 
 import android.epsi.com.bebeer.bean.Beer;
+import android.epsi.com.bebeer.bean.Brewery;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import retrofit.http.Query;
 
 /**
  * Created by fx on 20/01/16.
- * Represents end-point for our api
+ * List backend end-point
  */
 interface ApiInterface {
 
@@ -26,4 +27,13 @@ interface ApiInterface {
 
     @GET("/beers/{id}")
     Call<Beer> getBeer(@Path("id") int id);
+
+    @GET("/breweries")
+    Call<List<Brewery>> getBreweries(@Query("offset") int offset,
+                                     @Query("count") int count);
+
+    @GET("/breweries")
+    Call<List<Brewery>> getBreweries(@Query("offset") int offset,
+                                     @Query("count") int count,
+                                     @Query("name") String name);
 }

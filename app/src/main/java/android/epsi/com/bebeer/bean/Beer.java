@@ -1,19 +1,19 @@
 package android.epsi.com.bebeer.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Generated with http://www.jsonschema2pojo.org/
  */
 public class Beer {
 
-    @SerializedName("_id")
+    @SerializedName("id")
     @Expose
-    private Integer Id;
+    private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -43,17 +43,17 @@ public class Beer {
     private String image;
 
     /**
-     * @return The Id
+     * @return The id
      */
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     /**
-     * @param Id The _id
+     * @param id The id
      */
-    public void setId(Integer Id) {
-        this.Id = Id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
