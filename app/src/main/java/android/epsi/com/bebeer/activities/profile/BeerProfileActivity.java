@@ -1,12 +1,14 @@
 package android.epsi.com.bebeer.activities.profile;
 
 import android.content.Intent;
+import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.activities.list.BeerListActivity;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.services.image.ApiImageAccessor;
 import android.epsi.com.bebeer.services.remote.ApiClient;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,8 +28,9 @@ import retrofit.Retrofit;
  */
 public class BeerProfileActivity extends AppCompatActivity {
 
+    public static final String HTTPS_BEBEER_CLEVERAPPS_IO_BEERS = "https://bebeer.cleverapps.io/beers/";
+    public static final String ACTION_VIEW_INTENT_URL = AppConfig.API_BASE_URL + "beers/";
     private static final String TAG = "BeerProfileActivity";
-
     private ApiImageAccessor mAmiImageAccessor;
 
     @Override
@@ -44,8 +47,6 @@ public class BeerProfileActivity extends AppCompatActivity {
     }
 
     /**
-     * TODO implement it
-     *
      * @param shareBtn
      * @param beer
      */
@@ -55,10 +56,16 @@ public class BeerProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-//                sendIntent.setD("https://bebeer.cleverapps.io/beers/" + beer.getId());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, buildIntentUrl(beer));
+                sendIntent.setType("text/plain");
                 startActivity(sendIntent);
             }
         });
+    }
+
+    @NonNull
+    private String buildIntentUrl(Beer beer) {
+        return ACTION_VIEW_INTENT_URL + beer.getId();
     }
 
     /**
@@ -68,6 +75,7 @@ public class BeerProfileActivity extends AppCompatActivity {
      * @param apiClient
      */
     private void setUpBeerView(Intent intent, ApiClient apiClient) {
+
         final int beerId = parseIntent(intent);
 
         if (beerId == -1) {
