@@ -3,7 +3,6 @@
     <string name="title_activity_beer_profile">BeerProfileActivity</string>
     <string name="title_activity_beer_list">BeerList</string>
     <string name="beer_profile_beer_background_image_desc">Default beer image</string>
-    <string name="beer_list_title">Find your beer</string>
     <string name="beer_profile_no_id">An error occurred</string>
     <string name="beer_profile_error_api">Can\'t fetch this beer, sorry</string>
     <string name="beer_list_search_label">Search</string>

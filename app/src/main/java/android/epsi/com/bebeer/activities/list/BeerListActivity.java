@@ -15,15 +15,15 @@ import android.widget.ImageView;
 
 /**
  * Show list of beers, quick search
+ * TODO design better GUI, and animation from this activity to BeerProfileActivity
  */
 public class BeerListActivity extends AppCompatActivity {
-
-    private static final String TAG = "BeerListActivity";
 
     /**
      * Use for passing param to another activity
      */
     public static final String EXTRA_BEER_ID = "id";
+    private static final String TAG = "BeerListActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +57,13 @@ public class BeerListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (search.getText().length() > 0) {
                     search.setText("");
+                } else {
+                    search.requestFocus();
                 }
             }
         });
         search.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -88,7 +91,6 @@ public class BeerListActivity extends AppCompatActivity {
      * @param toolbar
      */
     private void setUpToolbar(Toolbar toolbar) {
-        toolbar.setTitle(getResources().getString(R.string.beer_list_title));
         setSupportActionBar(toolbar);
     }
 

@@ -58,7 +58,7 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
         mSearchHandler = new Handler();
 
         // Starting from 0, loading 20 items each request
-        setUpData(0, mCount, null, null);
+        setUpData(0, mCount);
     }
 
     /**
@@ -106,6 +106,15 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
             }
 
         });
+    }
+
+    /**
+     * overload with default values
+     * @param offset
+     * @param count
+     */
+    private void setUpData(final int offset, final int count) {
+        setUpData(0, mCount, null, null);;
     }
 
 

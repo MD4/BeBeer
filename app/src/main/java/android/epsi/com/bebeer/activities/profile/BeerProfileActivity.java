@@ -28,7 +28,6 @@ import retrofit.Retrofit;
  */
 public class BeerProfileActivity extends AppCompatActivity {
 
-    public static final String HTTPS_BEBEER_CLEVERAPPS_IO_BEERS = "https://bebeer.cleverapps.io/beers/";
     public static final String ACTION_VIEW_INTENT_URL = AppConfig.API_BASE_URL + "beers/";
     private static final String TAG = "BeerProfileActivity";
     private ApiImageAccessor mAmiImageAccessor;
@@ -143,7 +142,6 @@ public class BeerProfileActivity extends AppCompatActivity {
         TextView shortDesc = (TextView) findViewById(R.id.beer_profile_short_description);
         ImageView image = (ImageView) findViewById(R.id.beer_profile_beer_image);
 
-        // TODO Caching image?
         mAmiImageAccessor.displayImageToView(image, beer.getImage());
 
         toolbarName.setTitle(beer.getName());
