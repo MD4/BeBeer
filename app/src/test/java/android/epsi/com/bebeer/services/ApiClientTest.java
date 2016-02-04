@@ -2,6 +2,7 @@ package android.epsi.com.bebeer.services;
 
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Brewery;
+import android.epsi.com.bebeer.services.remote.ApiClient;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import org.junit.Before;
