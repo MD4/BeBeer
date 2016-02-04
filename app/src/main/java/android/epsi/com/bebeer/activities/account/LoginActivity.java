@@ -29,14 +29,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String TAG = "LoginActivity";
 
     // UI references.
-    private boolean signUp;
-    private ApiClient api;
+    private boolean mSignUp;
+    private ApiClient mApi;
 
-    private Button signInButton;
-    private Button signUpButton;
-    private Button backButton;
+    private Button mSignInButton;
+    private Button mSignUpButton;
+    private Button mBackButton;
 
-    private EditText emailFormView;
+    private EditText mEmailFormView;
 
 
     @Override
@@ -44,22 +44,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        api = new ApiClient(this);
+        mApi = new ApiClient(this);
 
-        signUp = false;
+        mSignUp = false;
 
-        final TextView userView = (TextView) findViewById(R.id.username);
-        final EditText passwordView = (EditText) findViewById(R.id.password);
+        final TextView userView = (TextView) findViewById(R.id.login_username);
+        final EditText passwordView = (EditText) findViewById(R.id.login_password);
         final View loginFormView = findViewById(R.id.login_form);
         final View progressView = findViewById(R.id.login_progress);
 
-        emailFormView = (EditText) findViewById(R.id.email);
+        mEmailFormView = (EditText) findViewById(R.id.login_email);
 
-        signInButton = (Button) findViewById(R.id.sign_in);
-        signUpButton = (Button) findViewById(R.id.sign_up);
-        backButton = (Button) findViewById(R.id.back);
+        mSignInButton = (Button) findViewById(R.id.login_sign_in);
+        mSignUpButton = (Button) findViewById(R.id.login_sign_up);
+        mBackButton = (Button) findViewById(R.id.login_back);
 
-        signInButton.setOnClickListener(new OnClickListener() {
+        mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = userView.getText().toString();
@@ -68,10 +68,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        signUpButton.setOnClickListener(new OnClickListener() {
+        mSignUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!signUp) {
+                if (!mSignUp) {
                     signUpView();
                 } else {
 
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        backButton.setOnClickListener(new OnClickListener() {
+        mBackButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 signInView();
@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         User user = new User();
         user.setUsername(username);
         user.setPassword(pwd);
-        api.authenticate(user).enqueue(
+        mApi.authenticate(user).enqueue(
                 new Callback<User>() {
                     @Override
                     public void onResponse(Response<User> response, Retrofit retrofit) {
@@ -117,17 +117,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     public void signInView() {
-        signUp = false;
-        signInButton.setVisibility(View.VISIBLE);
-        backButton.setVisibility(View.GONE);
-        emailFormView.setVisibility(View.GONE);
+        mSignUp = false;
+        mSignInButton.setVisibility(View.VISIBLE);
+        mBackButton.setVisibility(View.GONE);
+        mEmailFormView.setVisibility(View.GONE);
     }
 
     public void signUpView() {
-        signUp = true;
-        signInButton.setVisibility(View.GONE);
-        backButton.setVisibility(View.VISIBLE);
-        emailFormView.setVisibility(View.VISIBLE);
+        mSignUp = true;
+        mSignInButton.setVisibility(View.GONE);
+        mBackButton.setVisibility(View.VISIBLE);
+        mEmailFormView.setVisibility(View.VISIBLE);
     }
 
     @Override
