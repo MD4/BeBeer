@@ -51,7 +51,7 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
      * @param activity Context
      */
     public BeerListItemAdapter(Activity activity) {
-        mApiClient = new ApiClient();
+        mApiClient = new ApiClient(activity.getApplicationContext());
         mActivity = activity;
         mBeers = new ArrayList<>();
         mCount = 20;

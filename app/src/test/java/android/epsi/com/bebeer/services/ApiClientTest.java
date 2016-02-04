@@ -32,7 +32,7 @@ public class ApiClientTest {
 
     @Before
     public void createClient() {
-        mApiClient = new ApiClient();
+        mApiClient = new ApiClient(null);
     }
 
     @Test

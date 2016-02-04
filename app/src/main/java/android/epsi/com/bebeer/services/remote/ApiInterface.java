@@ -2,11 +2,15 @@ package android.epsi.com.bebeer.services.remote;
 
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Brewery;
+import android.epsi.com.bebeer.bean.User;
 
 import java.util.List;
 
 import retrofit.Call;
+import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
@@ -36,4 +40,20 @@ interface ApiInterface {
     Call<List<Brewery>> getBreweries(@Query("offset") int offset,
                                      @Query("count") int count,
                                      @Query("name") String name);
+
+    @GET("/users/{id}")
+    Call<User> getUser(@Path("id") String id);
+
+    @POST("/users")
+    Call<User> postUser(@Body User user);
+
+    @POST("/auth")
+    Call<User> postAuth(@Body User user);
+
+    @GET("/auth")
+    Call<User> getAuth(@Body User user);
+
+    @DELETE("/auth")
+    Call<Void> deleteAuth();
+
 }

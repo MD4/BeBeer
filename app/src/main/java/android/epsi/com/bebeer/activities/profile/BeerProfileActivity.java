@@ -39,7 +39,7 @@ public class BeerProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.beer_profile_toolbar);
         setSupportActionBar(toolbar);
 
-        ApiClient apiClient = new ApiClient();
+        ApiClient apiClient = new ApiClient(this);
         setUpBeerView(getIntent(), apiClient);
 
         mAmiImageAccessor = ApiImageAccessor.getInstance();
