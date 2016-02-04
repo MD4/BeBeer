@@ -1,9 +1,6 @@
 package android.epsi.com.bebeer.activities.account;
 
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.activities.list.BeerListActivity;
 import android.epsi.com.bebeer.bean.User;
@@ -18,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -25,7 +24,7 @@ import retrofit.Retrofit;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
 
@@ -34,7 +33,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private ApiClient mApi;
 
     private Button mSignInButton;
-    private Button mSignUpButton;
     private Button mBackButton;
 
     private EditText mEmailFormView;
@@ -51,13 +49,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         final TextView userView = (TextView) findViewById(R.id.login_username);
         final EditText passwordView = (EditText) findViewById(R.id.login_password);
-        final View loginFormView = findViewById(R.id.login_form);
-        final View progressView = findViewById(R.id.login_progress);
 
         mEmailFormView = (EditText) findViewById(R.id.login_email);
 
         mSignInButton = (Button) findViewById(R.id.login_sign_in);
-        mSignUpButton = (Button) findViewById(R.id.login_sign_up);
+        Button mSignUpButton = (Button) findViewById(R.id.login_sign_up);
         mBackButton = (Button) findViewById(R.id.login_back);
 
         mSignInButton.setOnClickListener(new OnClickListener() {
@@ -72,10 +68,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mSignUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "onClick() called with: " + "view = [" + view + "]");
                 if (!mSignUp) {
                     signUpView();
                 } else {
-
+                    String username = userView.getText().toString();
+                    String pwd = passwordView.getText().toString();
+                    String email = mEmailFormView.getText().toString();
+                    attemptSignUp(username, pwd, email);
                 }
             }
         });
@@ -89,6 +89,82 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     /**
+     * sign up user
+     *
+     * @param username the name of user
+     * @param pwd      the user password
+     * @param email    the user email
+     */
+    public void attemptSignUp(String username, String pwd, String email) {
+        Log.d(TAG, "attemptSignUp() called with: " + "username = [" + username + "], email = [" + email + "], pwd = [" + pwd + "]");
+        final User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(pwd);
+
+        mApi.createUser(user).enqueue(
+                new Callback<User>() {
+                    @Override
+                    public void onResponse(Response<User> response, Retrofit retrofit) {
+                        Log.d(TAG, "onResponse() called with: " + "response = [" + response + "], retrofit = [" + retrofit + "]");
+                        if (response.isSuccess()) {
+                            Log.d(TAG, "success status" + response.code());
+                            attemptLogin(user);
+                        } else {
+                            Log.d(TAG, "!success status" + response.code());
+                            try {
+                                Log.d(TAG, response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(LoginActivity.this, "Inscription failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        Log.d(TAG, "onFailure() called with: " + "throwable = [" + throwable + "]");
+                        Toast.makeText(LoginActivity.this, "Connection failed, server is down", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
+    /**
+     * log user
+     *
+     * @param user the user
+     */
+    public void attemptLogin(User user) {
+        mApi.authenticate(user).enqueue(
+                new Callback<User>() {
+                    @Override
+                    public void onResponse(Response<User> response, Retrofit retrofit) {
+                        Log.d(TAG, "onResponse() called with: " + "response = [" + response + "], retrofit = [" + retrofit + "]");
+                        if (response.isSuccess()) {
+                            Intent intent = new Intent(LoginActivity.this, BeerListActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Log.d(TAG, "status" + response.code());
+                            try {
+                                Log.d(TAG, response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(LoginActivity.this, "Connection failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        Log.d(TAG, "onFailure() called with: " + "throwable = [" + throwable + "]");
+                        Toast.makeText(LoginActivity.this, "Connection failed, server is down", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
+    /**
      * attemptLogin
      *
      * @param username name of user
@@ -99,29 +175,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         User user = new User();
         user.setUsername(username);
         user.setPassword(pwd);
-        mApi.authenticate(user).enqueue(
-                new Callback<User>() {
-                    @Override
-                    public void onResponse(Response<User> response, Retrofit retrofit) {
-                        Log.d(TAG, "onResponse() called with: " + "response = [" + response + "], retrofit = [" + retrofit + "]");
-                        if (response.isSuccess()) {
-                            Intent intent = new Intent(LoginActivity.this, BeerListActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Connection failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Throwable throwable) {
-                        Log.d(TAG, "onFailure() called with: " + "throwable = [" + throwable + "]");
-                        Toast.makeText(LoginActivity.this, "Connection failed, server is down", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-        );
+        attemptLogin(user);
     }
 
+    /**
+     * hide sign up field
+     */
     public void signInView() {
         mSignUp = false;
         mSignInButton.setVisibility(View.VISIBLE);
@@ -129,26 +188,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailFormView.setVisibility(View.GONE);
     }
 
+    /**
+     * show sign up field
+     */
     public void signUpView() {
         mSignUp = true;
         mSignInButton.setVisibility(View.GONE);
         mBackButton.setVisibility(View.VISIBLE);
         mEmailFormView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return null;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
     }
 }
 
