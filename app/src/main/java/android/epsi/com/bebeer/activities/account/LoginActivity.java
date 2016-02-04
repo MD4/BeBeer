@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import retrofit.Callback;
 import retrofit.Response;
@@ -103,13 +104,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     @Override
                     public void onResponse(Response<User> response, Retrofit retrofit) {
                         Log.d(TAG, "onResponse() called with: " + "response = [" + response + "], retrofit = [" + retrofit + "]");
-                        Intent intent = new Intent(LoginActivity.this, BeerListActivity.class);
-                        startActivity(intent);
+                        if (response.isSuccess()) {
+                            Intent intent = new Intent(LoginActivity.this, BeerListActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Connection failed", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
                     public void onFailure(Throwable throwable) {
                         Log.d(TAG, "onFailure() called with: " + "throwable = [" + throwable + "]");
+                        Toast.makeText(LoginActivity.this, "Connection failed, server is down", Toast.LENGTH_SHORT).show();
 
                     }
                 }
