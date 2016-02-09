@@ -38,7 +38,7 @@ public class GetCookieInterceptor implements Interceptor {
         Set<String> preferences = prefs.getStringSet(AppConfig.COOKIES_KEY, new HashSet<String>());
         for (String cookie : preferences) {
             builder.addHeader(HEADER, cookie);
-            Log.v(TAG, String.format("Adding header %s", cookie));
+            Log.v(TAG, String.format("Get cookie %s", cookie));
         }
         return chain.proceed(builder.build());
     }

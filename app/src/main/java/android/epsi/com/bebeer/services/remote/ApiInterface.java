@@ -51,7 +51,7 @@ interface ApiInterface {
     Call<User> postAuth(@Body User user);
 
     @GET("/auth")
-    Call<User> getAuth(@Body User user);
+    Call<User> getAuth();
 
     @DELETE("/auth")
     Call<Void> deleteAuth();

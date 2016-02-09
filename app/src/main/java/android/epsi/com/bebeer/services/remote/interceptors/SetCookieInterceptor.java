@@ -36,7 +36,7 @@ public class SetCookieInterceptor implements Interceptor {
             Set<String> cookies = new HashSet<>();
             for (String cookie : originalResponse.headers(HEADER)) {
                 cookies.add(cookie);
-                Log.v(TAG, String.format("Setting cookie: %s", cookie));
+                Log.v(TAG, String.format("Set cookie: %s", cookie));
             }
             SharedPreferences.Editor simpleCalendar = mContext.getSharedPreferences(AppConfig.PREFS_SCOPE, Context.MODE_PRIVATE).edit();
             simpleCalendar.putStringSet(AppConfig.COOKIES_KEY, cookies).apply();

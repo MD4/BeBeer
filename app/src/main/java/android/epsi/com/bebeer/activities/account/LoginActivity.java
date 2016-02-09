@@ -115,7 +115,6 @@ public class LoginActivity extends AppCompatActivity {
                             try {
                                 Log.d(TAG, response.errorBody().string());
                             } catch (IOException e) {
-                                e.printStackTrace();
                             }
                             Toast.makeText(LoginActivity.this, "Inscription failed", Toast.LENGTH_SHORT).show();
                         }
@@ -196,6 +195,26 @@ public class LoginActivity extends AppCompatActivity {
         mSignInButton.setVisibility(View.GONE);
         mBackButton.setVisibility(View.VISIBLE);
         mEmailFormView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mApi.isAuthenticated().enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Response<User> response, Retrofit retrofit) {
+                if (response.isSuccess()) {
+                    Log.i(TAG, "onResponse: already connected, going to BeerListActivity");
+                    Intent intent = new Intent(LoginActivity.this, BeerListActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
     }
 }
 

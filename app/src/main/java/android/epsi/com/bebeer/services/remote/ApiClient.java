@@ -31,6 +31,11 @@ public class ApiClient {
      */
     private static ApiInterface mApi;
 
+    /**
+     * Current user, or null if none
+     */
+    private static User mUser = null;
+
     public ApiClient(Context ctx) {
 
         // Build our client if not already build
@@ -107,7 +112,7 @@ public class ApiClient {
 
     /**
      * Try to authenticate given user
-     *
+     * Fx cqcq
      * @param user
      * @return
      */
@@ -118,11 +123,10 @@ public class ApiClient {
     /**
      * Ask backend if user is authenticated or not
      *
-     * @param user
      * @return
      */
-    public Call<User> isAuthenticated(User user) {
-        return mApi.getAuth(user);
+    public Call<User> isAuthenticated() {
+        return mApi.getAuth();
     }
 
     /**
