@@ -124,7 +124,6 @@ public class ApiClient {
 
     /**
      * Try to authenticate given user
-     * Fx cqcq
      * @param user
      * @return
      */

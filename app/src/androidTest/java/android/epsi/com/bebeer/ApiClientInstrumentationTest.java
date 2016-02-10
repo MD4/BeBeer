@@ -10,6 +10,7 @@ import android.epsi.com.bebeer.services.remote.ApiClient;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +35,7 @@ import static org.hamcrest.core.StringStartsWith.startsWith;
 public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private static final String TAG = "ClientInstrumentation";
     private ApiClient mApiClient;
+    private Context mContext;
 
     public ApiClientInstrumentationTest() {
         super(LoginActivity.class);
@@ -47,9 +49,9 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
         // for your test to run with AndroidJUnitRunner.
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         injectInstrumentation(instrumentation);
-        Context context = instrumentation.getContext();
-        context.getSharedPreferences(AppConfig.PREFS_SCOPE, Context.MODE_PRIVATE).edit().clear().apply();
-        mApiClient = new ApiClient(context);
+        mContext = instrumentation.getTargetContext();
+        mContext.getSharedPreferences(AppConfig.PREFS_SCOPE, Context.MODE_PRIVATE).edit().clear().apply();
+        mApiClient = new ApiClient(mContext);
     }
 
     @Test
@@ -63,7 +65,10 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
 
     @Test
     public void testAuth() throws IOException {
+
+        TestUtils.logPrefs(mContext);
         Response<User> resp = TestUtils.getUserResponse(mApiClient, "test", "testtest");
+        TestUtils.logPrefs(mContext);
 
         assertThat(
                 "request should have succeed",
@@ -87,9 +92,7 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
 
     @Test
     public void testLogout() throws IOException {
-        if (!mApiClient.isAuthenticated().execute().isSuccess()) {
-            TestUtils.getUserResponse(mApiClient, "test", "testtest");
-        }
+        TestUtils.getUserResponse(mApiClient, "test", "testtest");
 
         assertThat(
                 "user is authenticated",
@@ -129,10 +132,37 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
         );
     }
 
+    @Test
+    public void testGetUser() throws IOException {
+        Response<User> userResponse = TestUtils.getUserResponse(mApiClient, "FXHibon", "lolilol");
+
+        User user = null;
+        assertThat(
+                "user not defined",
+                user,
+                is(nullValue())
+        );
+
+        user = userResponse.body();
+        Log.i(TAG, "testGetUser: " + user.toString());
+        assertThat(
+                "user is defined",
+                user,
+                not(nullValue())
+        );
+
+
+        assertThat(
+                "user got a mail address",
+                user.getEmail(),
+                equalTo("djxf44@gmail.com")
+        );
+    }
+
 
     @Test
     public void testGetBeers() throws IOException {
-        Response<User> respUser = TestUtils.getUserResponse(mApiClient, "test", "testtest");
+        TestUtils.getUserResponse(mApiClient, "test", "testtest");
 
         Response<List<Beer>> resp = mApiClient.getBeers(0, 20).execute();
         assertThat(
@@ -156,7 +186,7 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
 
     @Test
     public void testGetBeersCounted() throws IOException {
-
+        TestUtils.getUserResponse(mApiClient, "test", "testtest");
         Response<List<Beer>> resp = mApiClient.getBeers(0, 30).execute();
         assertThat(
                 "request should have succeed",
@@ -179,6 +209,7 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
 
     @Test
     public void testGetBeerWithSearch() throws IOException {
+        TestUtils.getUserResponse(mApiClient, "test", "testtest");
         String testId = "1509";
         Response<Beer> resp = mApiClient.getBeer(testId).execute();
 
@@ -203,6 +234,7 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
 
     @Test
     public void testGetBreweries() throws IOException {
+        TestUtils.getUserResponse(mApiClient, "test", "testtest");
         Response<List<Brewery>> response = mApiClient.getBreweries(0, 20).execute();
 
         assertThat(
@@ -226,6 +258,7 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
 
     @Test
     public void testGetBreweriesCounted() throws IOException {
+        TestUtils.getUserResponse(mApiClient, "test", "testtest");
         Response<List<Brewery>> response = mApiClient.getBreweries(0, 30).execute();
 
         assertThat(
@@ -249,6 +282,7 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
 
     @Test
     public void testGetBreweriesSearch() throws IOException {
+        TestUtils.getUserResponse(mApiClient, "test", "testtest");
         String query = "Bracki";
         Response<List<Brewery>> response = mApiClient.getBreweries(0, 20, query).execute();
 
