@@ -93,6 +93,7 @@ public class ApiImageAccessor {
                 InputStream in = new java.net.URL(mUrl).openStream();
                 bitMap = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
+
                 Log.e(TAG, "Error while fetching " + mUrl, e);
             }
             return bitMap;

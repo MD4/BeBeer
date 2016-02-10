@@ -5,11 +5,15 @@ import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Brewery;
 import android.epsi.com.bebeer.bean.User;
+import android.epsi.com.bebeer.services.remote.convertors.DateTimeTypeConverter;
 import android.epsi.com.bebeer.services.remote.interceptors.GetCookieInterceptor;
 import android.epsi.com.bebeer.services.remote.interceptors.SetCookieInterceptor;
 import android.util.Log;
 
+import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.OkHttpClient;
+
+import org.joda.time.DateTime;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +38,7 @@ public class ApiClient {
     /**
      * Current user, or null if none
      */
-    private static User mUser = null;
+    private static Beer mUser = null;
 
     public ApiClient(Context ctx) {
 
@@ -49,7 +53,15 @@ public class ApiClient {
             ));
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(AppConfig.API_BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(
+                            // Handle Date (un)serialize
+                            GsonConverterFactory
+                                    .create(
+                                            new GsonBuilder()
+                                                    .registerTypeAdapter(DateTime.class, new DateTimeTypeConverter())
+                                                    .create()
+                                    )
+                    )
                     .client(httpClient)
                     .build();
             mApi = retrofit.create(ApiInterface.class);
@@ -83,7 +95,7 @@ public class ApiClient {
      * @param id Id to be looked up
      * @return promise-like object
      */
-    public Call<Beer> getBeer(int id) {
+    public Call<Beer> getBeer(String id) {
         Log.i(TAG, "getBeer() called with: " + "id = [" + id + "]");
         return mApi.getBeer(id);
     }

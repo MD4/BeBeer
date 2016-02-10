@@ -1,44 +1,59 @@
-package android.epsi.com.bebeer.services;
+package android.epsi.com.bebeer;
 
+import android.epsi.com.bebeer.activities.account.LoginActivity;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Brewery;
 import android.epsi.com.bebeer.services.remote.ApiClient;
-import android.test.suitebuilder.annotation.SmallTest;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
+import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.util.List;
 
 import retrofit.Response;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.CoreMatchers.startsWith;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.IsNull.nullValue;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 
 /**
  * Created by fx on 20/01/16.
  */
-@SmallTest
-public class ApiClientTest {
+@RunWith(AndroidJUnit4.class)
+public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
     private ApiClient mApiClient;
 
-    public ApiClientTest() {
+    public ApiClientInstrumentationTest() {
+        super(LoginActivity.class);
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+
+        // Injecting the Instrumentation instance is required
+        // for your test to run with AndroidJUnitRunner.
+        injectInstrumentation(InstrumentationRegistry.getInstrumentation());
     }
 
     @Before
     public void createClient() {
-        mApiClient = new ApiClient(null);
+        mApiClient = new ApiClient(InstrumentationRegistry.getInstrumentation().getContext());
     }
 
     @Test
     public void testCreateApiClient() {
         assertThat(
-                "client should be instantiated",
+                "client should have been instantiated",
                 mApiClient,
                 not(nullValue())
         );
@@ -92,7 +107,7 @@ public class ApiClientTest {
 
     @Test
     public void testGetBeerWithSearch() throws IOException {
-        int testId = 1509;
+        String testId = "1509";
         Response<Beer> resp = mApiClient.getBeer(testId).execute();
 
         assertThat(
@@ -110,7 +125,7 @@ public class ApiClientTest {
         assertThat(
                 "beer retrieved has the right id",
                 resp.body().getId(),
-                is(testId)
+                equalTo(testId)
         );
     }
 

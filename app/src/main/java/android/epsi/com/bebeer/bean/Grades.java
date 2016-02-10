@@ -1,3 +1,4 @@
+
 package android.epsi.com.bebeer.bean;
 
 import com.google.gson.annotations.Expose;
@@ -7,53 +8,65 @@ public class Grades {
 
     @SerializedName("taste")
     @Expose
-    private Double taste;
+    private Integer taste;
     @SerializedName("thirsty")
     @Expose
-    private Double thirsty;
+    private Integer thirsty;
     @SerializedName("bitterness")
     @Expose
-    private Double bitterness;
+    private Integer bitterness;
 
     /**
-     * @return The taste
+     *
+     * @return
+     *     The taste
      */
-    public Double getTaste() {
+    public Integer getTaste() {
         return taste;
     }
 
     /**
-     * @param taste The taste
+     *
+     * @param taste
+     *     The taste
      */
-    public void setTaste(Double taste) {
+    public void setTaste(Integer taste) {
         this.taste = taste;
     }
 
     /**
-     * @return The thirsty
+     *
+     * @return
+     *     The thirsty
      */
-    public Double getThirsty() {
+    public Integer getThirsty() {
         return thirsty;
     }
 
     /**
-     * @param thirsty The thirsty
+     *
+     * @param thirsty
+     *     The thirsty
      */
-    public void setThirsty(Double thirsty) {
+    public void setThirsty(Integer thirsty) {
         this.thirsty = thirsty;
     }
 
     /**
-     * @return The bitterness
+     *
+     * @return
+     *     The bitterness
      */
-    public Double getBitterness() {
+    public Integer getBitterness() {
         return bitterness;
     }
 
     /**
-     * @param bitterness The bitterness
+     *
+     * @param bitterness
+     *     The bitterness
      */
-    public void setBitterness(Double bitterness) {
+    public void setBitterness(Integer bitterness) {
         this.bitterness = bitterness;
     }
 

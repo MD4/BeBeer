@@ -1,84 +1,106 @@
+
 package android.epsi.com.bebeer.bean;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-    /**
-     * (Required)
-     */
-    @SerializedName("username")
-    @Expose
-    private String username = "";
-    /**
-     * (Required)
-     */
     @SerializedName("email")
     @Expose
-    private String email = "";
-    /**
-     * (Required)
-     */
+    private String email;
+    @SerializedName("ratings")
+    @Expose
+    private List<Rating> ratings = new ArrayList<Rating>();
+    @SerializedName("gravatar")
+    @Expose
+    private String gravatar;
+    @SerializedName("username")
+    @Expose
+    private String username;
     @SerializedName("password")
     @Expose
-    private String password = "";
-
-    public User() {
-    }
+    private String password;
 
     /**
-     * (Required)
-     *
-     * @return The username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * (Required)
-     *
-     * @param username The username
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
-     * (Required)
-     *
-     * @return The email
+     * 
+     * @return
+     *     The email
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * (Required)
-     *
-     * @param email The email
+     * 
+     * @param email
+     *     The email
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * (Required)
-     *
-     * @return The password
+     * 
+     * @return
+     *     The ratings
      */
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    /**
+     * 
+     * @param ratings
+     *     The ratings
+     */
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    /**
+     * 
+     * @return
+     *     The gravatar
+     */
+    public String getGravatar() {
+        return gravatar;
+    }
+
+    /**
+     * 
+     * @param gravatar
+     *     The gravatar
+     */
+    public void setGravatar(String gravatar) {
+        this.gravatar = gravatar;
+    }
+
+    /**
+     * 
+     * @return
+     *     The username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * 
+     * @param username
+     *     The username
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    /**
-     * (Required)
-     *
-     * @param password The password
-     */
     public void setPassword(String password) {
         this.password = password;
     }
-
 }
