@@ -8,20 +8,20 @@ public class Grades {
 
     @SerializedName("taste")
     @Expose
-    private Integer taste;
+    private Double taste;
     @SerializedName("thirsty")
     @Expose
-    private Integer thirsty;
+    private Double thirsty;
     @SerializedName("bitterness")
     @Expose
-    private Integer bitterness;
+    private Double bitterness;
 
     /**
      *
      * @return
      *     The taste
      */
-    public Integer getTaste() {
+    public Double getTaste() {
         return taste;
     }
 
@@ -30,7 +30,7 @@ public class Grades {
      * @param taste
      *     The taste
      */
-    public void setTaste(Integer taste) {
+    public void setTaste(Double taste) {
         this.taste = taste;
     }
 
@@ -39,7 +39,7 @@ public class Grades {
      * @return
      *     The thirsty
      */
-    public Integer getThirsty() {
+    public Double getThirsty() {
         return thirsty;
     }
 
@@ -48,7 +48,7 @@ public class Grades {
      * @param thirsty
      *     The thirsty
      */
-    public void setThirsty(Integer thirsty) {
+    public void setThirsty(Double thirsty) {
         this.thirsty = thirsty;
     }
 
@@ -57,7 +57,7 @@ public class Grades {
      * @return
      *     The bitterness
      */
-    public Integer getBitterness() {
+    public Double getBitterness() {
         return bitterness;
     }
 
@@ -66,7 +66,7 @@ public class Grades {
      * @param bitterness
      *     The bitterness
      */
-    public void setBitterness(Integer bitterness) {
+    public void setBitterness(Double bitterness) {
         this.bitterness = bitterness;
     }
 

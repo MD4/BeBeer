@@ -6,7 +6,7 @@ package android.epsi.com.bebeer;
  */
 public interface AppConfig {
 
-    String API_BASE_URL = "https://bebeer.cleverapps.io/";
+    String API_BASE_URL = "https://bebeer.herokuapp.com/";
     String PREFS_SCOPE = "PREFS_SCOPE_BEBEER";
     String COOKIES_KEY = "PREFS_COOKIES";
 }

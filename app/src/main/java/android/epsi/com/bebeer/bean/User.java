@@ -1,10 +1,11 @@
 
 package android.epsi.com.bebeer.bean;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 
@@ -13,7 +14,7 @@ public class User {
     private String email;
     @SerializedName("ratings")
     @Expose
-    private List<Rating> ratings = new ArrayList<Rating>();
+    private List<Rating> ratings = new ArrayList<>();
     @SerializedName("gravatar")
     @Expose
     private String gravatar;
@@ -102,5 +103,12 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "ratings=" + ratings +
+                '}';
     }
 }

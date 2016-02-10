@@ -1,8 +1,11 @@
 package android.epsi.com.bebeer;
 
+import android.app.Instrumentation;
+import android.content.Context;
 import android.epsi.com.bebeer.activities.account.LoginActivity;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Brewery;
+import android.epsi.com.bebeer.bean.User;
 import android.epsi.com.bebeer.services.remote.ApiClient;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
@@ -29,7 +32,7 @@ import static org.hamcrest.core.StringStartsWith.startsWith;
  */
 @RunWith(AndroidJUnit4.class)
 public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCase2<LoginActivity> {
-
+    private static final String TAG = "ClientInstrumentation";
     private ApiClient mApiClient;
 
     public ApiClientInstrumentationTest() {
@@ -42,12 +45,11 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
 
         // Injecting the Instrumentation instance is required
         // for your test to run with AndroidJUnitRunner.
-        injectInstrumentation(InstrumentationRegistry.getInstrumentation());
-    }
-
-    @Before
-    public void createClient() {
-        mApiClient = new ApiClient(InstrumentationRegistry.getInstrumentation().getContext());
+        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+        injectInstrumentation(instrumentation);
+        Context context = instrumentation.getContext();
+        context.getSharedPreferences(AppConfig.PREFS_SCOPE, Context.MODE_PRIVATE).edit().clear().apply();
+        mApiClient = new ApiClient(context);
     }
 
     @Test
@@ -60,7 +62,77 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
     }
 
     @Test
+    public void testAuth() throws IOException {
+        Response<User> resp = TestUtils.getUserResponse(mApiClient, "test", "testtest");
+
+        assertThat(
+                "request should have succeed",
+                resp.isSuccess(),
+                is(true)
+        );
+
+        assertThat(
+                "user 'test' should have been authenticated",
+                resp.body().getUsername(),
+                equalTo("test")
+        );
+
+        Response<User> execute = mApiClient.isAuthenticated().execute();
+        assertThat(
+                "isAuth is true",
+                execute.isSuccess(),
+                is(true)
+        );
+    }
+
+    @Test
+    public void testLogout() throws IOException {
+        if (!mApiClient.isAuthenticated().execute().isSuccess()) {
+            TestUtils.getUserResponse(mApiClient, "test", "testtest");
+        }
+
+        assertThat(
+                "user is authenticated",
+                mApiClient.isAuthenticated().execute().isSuccess(),
+                is(true)
+        );
+
+        Response<Void> execute = mApiClient.logout().execute();
+
+        assertThat(
+                "user should be logged out",
+                execute.isSuccess(),
+                is(true)
+        );
+
+        assertThat(
+                "user is no longer authenticated",
+                mApiClient.isAuthenticated().execute().isSuccess(),
+                is(false)
+        );
+    }
+
+    @Test
+    public void testFailedAuth() throws IOException {
+        Response<User> resp = TestUtils.getUserResponse(mApiClient, "wegsrh", "tykjyt");
+
+        assertThat(
+                "request should NOT have succeed",
+                resp.isSuccess(),
+                is(false)
+        );
+
+        assertThat(
+                "user 'tykjyt' should NOT have been authenticated",
+                resp.code(),
+                equalTo(401)
+        );
+    }
+
+
+    @Test
     public void testGetBeers() throws IOException {
+        Response<User> respUser = TestUtils.getUserResponse(mApiClient, "test", "testtest");
 
         Response<List<Beer>> resp = mApiClient.getBeers(0, 20).execute();
         assertThat(

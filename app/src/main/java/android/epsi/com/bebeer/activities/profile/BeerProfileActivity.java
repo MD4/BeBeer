@@ -106,7 +106,7 @@ public class BeerProfileActivity extends AppCompatActivity {
 
         final String beerId = parseIntent(intent);
 
-        if (beerId.equals("-1")) {
+        if (beerId == null || beerId.equals("")) {
             Log.e(TAG, "setUpBeerView: no beer id found in extra");
             Toast.makeText(BeerProfileActivity.this, getResources().getString(R.string.beer_profile_no_id), Toast.LENGTH_SHORT).show();
             return;
@@ -143,16 +143,16 @@ public class BeerProfileActivity extends AppCompatActivity {
      * @return Beer id if found, else -1
      */
     private String parseIntent(Intent intent) {
-        int beerId = intent.getIntExtra(BeerListActivity.EXTRA_BEER_ID, -1);
-        if (beerId == -1 && intent.getData() != null) {
+        String beerId = intent.getStringExtra(BeerListActivity.EXTRA_BEER_ID);
+        if (beerId == null && intent.getData() != null) {
             String segment = intent.getData().getLastPathSegment();
             try {
-                beerId = Integer.parseInt(segment);
+                beerId = String.valueOf(segment);
             } catch (NumberFormatException e) {
-                beerId = -1;
+                beerId = null;
             }
         }
-        return String.valueOf(beerId);
+        return beerId;
     }
 
     /**
