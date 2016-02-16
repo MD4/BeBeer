@@ -22,6 +22,7 @@ import java.util.List;
 import retrofit.Response;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
@@ -156,6 +157,12 @@ public class ApiClientInstrumentationTest extends ActivityInstrumentationTestCas
                 "user got a mail address",
                 user.getEmail(),
                 equalTo("djxf44@gmail.com")
+        );
+
+        assertThat(
+                "user got ratings",
+                user.getRatings().size(),
+                greaterThan(0)
         );
     }
 
