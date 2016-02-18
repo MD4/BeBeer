@@ -4,6 +4,7 @@ import android.content.Context;
 import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Brewery;
+import android.epsi.com.bebeer.bean.Last;
 import android.epsi.com.bebeer.bean.Rate;
 import android.epsi.com.bebeer.bean.User;
 import android.epsi.com.bebeer.services.remote.convertors.DateTimeTypeConverter;
@@ -181,5 +182,9 @@ public class ApiClient {
         Rate rating = new Rate();
         rating.setRating(rate);
         return mApi.rateBeer(id, rating);
+    }
+
+    public Call<List<Last>> getRates(String id) {
+        return mApi.getRates(id);
     }
 }

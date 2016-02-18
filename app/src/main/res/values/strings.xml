@@ -8,7 +8,7 @@
     <string name="beer_list_search_label">Search</string>
     <string name="beer_country">Country: </string>
     <string name="beer_brewery">Brewery: </string>
-    <string name="beer_comment">Comment: </string>
+    <string name="beer_comment">Comment</string>
     <string name="beer_fermentation">Fermentation: </string>
     <string name="beer_desc">Description: </string>
     <string name="beer_profile_share_btn_desc">share-btn</string>
@@ -28,5 +28,5 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
-    </string>
+    </string>iun p
 </resources>

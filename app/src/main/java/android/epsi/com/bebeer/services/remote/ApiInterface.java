@@ -2,6 +2,7 @@ package android.epsi.com.bebeer.services.remote;
 
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Brewery;
+import android.epsi.com.bebeer.bean.Last;
 import android.epsi.com.bebeer.bean.Rate;
 import android.epsi.com.bebeer.bean.User;
 
@@ -32,6 +33,9 @@ interface ApiInterface {
 
     @GET("/beers/{id}")
     Call<Beer> getBeer(@Path("id") String id);
+
+    @GET("/beers/{id}/ratings")
+    Call<List<Last>> getRates(@Path("id") String id);
 
     @POST("/beers/{id}/ratings")
     Call<Void> rateBeer(@Path("id") String id, @Body Rate rate);

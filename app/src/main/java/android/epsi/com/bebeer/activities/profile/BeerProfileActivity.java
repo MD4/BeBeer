@@ -5,6 +5,7 @@ import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.activities.account.LoginActivity;
 import android.epsi.com.bebeer.activities.list.BeerListActivity;
+import android.epsi.com.bebeer.activities.profile.adapters.RateItemAdapter;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Rating;
 import android.epsi.com.bebeer.bean.User;
@@ -14,6 +15,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -224,6 +227,21 @@ public class BeerProfileActivity extends AppCompatActivity {
 
         ImageView shareBtn = (ImageView) findViewById(R.id.beer_profile_share_btn);
         setUpShareBtn(shareBtn, beer);
+        setUpCommentsList(beer);
+    }
+
+    /**
+     * Init comments/rate list
+     *
+     * @param beer
+     */
+    private void setUpCommentsList(final Beer beer) {
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.beer_profile_comments_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        recyclerView.setHasFixedSize(true);
+
+        RecyclerView.Adapter rateItemAdapter = new RateItemAdapter(this, beer);
+        recyclerView.setAdapter(rateItemAdapter);
     }
 
 
