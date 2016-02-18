@@ -4,6 +4,7 @@ import android.content.Context;
 import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Brewery;
+import android.epsi.com.bebeer.bean.Rate;
 import android.epsi.com.bebeer.bean.User;
 import android.epsi.com.bebeer.services.remote.convertors.DateTimeTypeConverter;
 import android.epsi.com.bebeer.services.remote.interceptors.GetCookieInterceptor;
@@ -167,5 +168,18 @@ public class ApiClient {
      */
     public Call<User> createUser(User user) {
         return mApi.postUser(user);
+    }
+
+    /**
+     * Rate the given beer
+     *
+     * @param id   Beer id
+     * @param rate Rate value
+     * @return
+     */
+    public Call<Void> rateBeer(String id, Integer rate) {
+        Rate rating = new Rate();
+        rating.setRating(rate);
+        return mApi.rateBeer(id, rating);
     }
 }

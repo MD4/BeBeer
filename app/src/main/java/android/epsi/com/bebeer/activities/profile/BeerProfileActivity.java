@@ -22,6 +22,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit.Callback;
@@ -160,7 +161,7 @@ public class BeerProfileActivity extends AppCompatActivity {
      *
      * @param beer
      */
-    private void bindBeerToView(Beer beer) {
+    private void bindBeerToView(final Beer beer) {
         CollapsingToolbarLayout toolbarName = (CollapsingToolbarLayout) findViewById(R.id.beer_profile_toolbar_layout);
         TextView country = (TextView) findViewById(R.id.beer_profile_country);
         TextView brewery = (TextView) findViewById(R.id.beer_profile_brewery);
@@ -180,6 +181,34 @@ public class BeerProfileActivity extends AppCompatActivity {
         shortDesc.setText(beer.getShortDescription());
         rating.setMax(10);
 
+        final ApiClient apiClient = new ApiClient(BeerProfileActivity.this);
+
+        // Add rate bar listener
+        rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                if (fromUser) {
+                    apiClient.rateBeer(beer.getId(), (int) rating).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Response<Void> response, Retrofit retrofit) {
+                            if (!response.isSuccess()) {
+                                try {
+                                    Log.d(TAG, "onResponse: " + response.errorBody().string());
+                                } catch (IOException ignored) {
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Throwable t) {
+                            Log.e(TAG, "onFailure: ", t);
+                        }
+                    });
+                    Log.i(TAG, "onRatingChanged: rating = " + rating);
+                }
+            }
+        });
+
         List<Rating> ratings = mUser.getRatings();
         Rating rate = null;
         for (Rating rateTmp : ratings) {
@@ -191,6 +220,7 @@ public class BeerProfileActivity extends AppCompatActivity {
         if (rate != null) {
             rating.setRating(rate.getRate());
         }
+
 
         ImageView shareBtn = (ImageView) findViewById(R.id.beer_profile_share_btn);
         setUpShareBtn(shareBtn, beer);
