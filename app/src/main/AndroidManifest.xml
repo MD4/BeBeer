@@ -32,11 +32,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="bebeer.cleverapps.io"
+                    android:host="bebeer.herokuapp.com"
                     android:pathPrefix="/beers/"
                     android:scheme="https" />
                 <data
-                    android:host="bebeer.cleverapps.io"
+                    android:host="bebeer.herokuapp.com"
                     android:pathPrefix="/beers/"
                     android:scheme="http" />
             </intent-filter>

@@ -31,6 +31,26 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/beer_profile_share_btn"
+                        android:layout_width="@dimen/beer_profile_share_width"
+                        android:layout_height="@dimen/beer_profile_share_height"
+                        android:background="@drawable/ic_share_black_24dp"
+                        android:contentDescription="@string/beer_profile_share_btn_desc"
+                        android:foreground="?android:attr/selectableItemBackground" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
@@ -103,26 +123,6 @@
                         android:id="@+id/beer_profile_fermentation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:id="@+id/beer_profile_share_btn"
-                        android:layout_width="@dimen/beer_profile_share_width"
-                        android:layout_height="@dimen/beer_profile_share_height"
-                        android:background="@drawable/ic_share_black_24dp"
-                        android:contentDescription="@string/beer_profile_share_btn_desc"
-                        android:foreground="?android:attr/selectableItemBackground" />
-
                 </LinearLayout>
 
                 <RatingBar

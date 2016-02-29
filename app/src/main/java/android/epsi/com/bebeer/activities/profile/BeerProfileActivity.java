@@ -172,7 +172,7 @@ public class BeerProfileActivity extends AppCompatActivity {
         TextView fermentation = (TextView) findViewById(R.id.beer_profile_fermentation);
         TextView shortDesc = (TextView) findViewById(R.id.beer_profile_short_description);
         ImageView image = (ImageView) findViewById(R.id.beer_profile_beer_image);
-        RatingBar rating = (RatingBar) findViewById(R.id.beer_profile_rating);
+        final RatingBar rating = (RatingBar) findViewById(R.id.beer_profile_rating);
 
         mApiImageAccessor.displayImageToView(image, beer.getImage());
 
@@ -189,11 +189,13 @@ public class BeerProfileActivity extends AppCompatActivity {
         // Add rate bar listener
         rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+            public void onRatingChanged(RatingBar ratingBar, float ratingValue, boolean fromUser) {
                 if (fromUser) {
-                    apiClient.rateBeer(beer.getId(), (int) rating).enqueue(new Callback<Void>() {
+                    rating.setEnabled(false);
+                    apiClient.rateBeer(beer.getId(), (int) ratingValue).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Response<Void> response, Retrofit retrofit) {
+                            rating.setEnabled(true);
                             if (!response.isSuccess()) {
                                 try {
                                     Log.d(TAG, "onResponse: " + response.errorBody().string());
@@ -204,10 +206,11 @@ public class BeerProfileActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Throwable t) {
+                            rating.setEnabled(true);
                             Log.e(TAG, "onFailure: ", t);
                         }
                     });
-                    Log.i(TAG, "onRatingChanged: rating = " + rating);
+                    Log.i(TAG, "onRatingChanged: rating = " + ratingValue);
                 }
             }
         });
