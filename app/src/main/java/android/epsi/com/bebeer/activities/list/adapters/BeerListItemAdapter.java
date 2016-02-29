@@ -3,6 +3,7 @@ package android.epsi.com.bebeer.activities.list.adapters;
 import android.app.Activity;
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.bean.Beer;
+import android.epsi.com.bebeer.services.image.ApiImageAccessor;
 import android.epsi.com.bebeer.services.remote.ApiClient;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +45,7 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
     private final Handler mSearchHandler;
     private String mSearch;
     private Runnable mSearchRunnable;
+    private ApiImageAccessor mApiImageAccessor;
 
     /**
      * Simple constructor
@@ -56,6 +58,8 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
         mBeers = new ArrayList<>();
         mCount = 20;
         mSearchHandler = new Handler();
+
+        mApiImageAccessor = ApiImageAccessor.getInstance();
 
         // Starting from 0, loading 20 items each request
         setUpData(0, mCount);
@@ -151,6 +155,8 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
         holder.getName().setText(beer.getName());
         holder.getBrewery().setText(beer.getBrewery());
         holder.getCountry().setText(beer.getCountry());
+
+        mApiImageAccessor.displayImageToView(holder.getImage(), beer.getImage());
     }
 
     @Override

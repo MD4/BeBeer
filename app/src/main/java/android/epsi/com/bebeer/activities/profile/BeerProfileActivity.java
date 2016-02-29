@@ -236,6 +236,7 @@ public class BeerProfileActivity extends AppCompatActivity {
      * @param beer
      */
     private void setUpCommentsList(final Beer beer) {
+        Log.i(TAG, "setUpCommentsList() called with: " + "beer = [" + beer + "]");
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.beer_profile_comments_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setHasFixedSize(true);

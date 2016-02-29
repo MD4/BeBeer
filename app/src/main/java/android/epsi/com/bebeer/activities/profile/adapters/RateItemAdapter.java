@@ -4,6 +4,7 @@ import android.content.Context;
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Last;
+import android.epsi.com.bebeer.bean.Ratings;
 import android.epsi.com.bebeer.services.remote.ApiClient;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -44,18 +45,20 @@ public class RateItemAdapter extends RecyclerView.Adapter<RateItemViewHolder> {
         mBeerId = beer.getId();
         mApiClient = new ApiClient(context);
         mRates = new ArrayList<>();
-        mRates.addAll(beer.getRatings().getLast());
+        Ratings ratings = beer.getRatings();
+        if (ratings != null) {
+            mRates.addAll(ratings.getLast());
+        }
 
-        setUpData(null);
+        setUpData();
     }
 
     /**
      * Fetch data, paginated
      *
-     * @param holder
      */
-    private void setUpData(final RateItemViewHolder holder) {
-        Log.i(TAG, "setUpData() called with: [" + holder + "]");
+    private void setUpData() {
+        Log.i(TAG, "setUpData()");
         Call<List<Last>> rates;
 
         rates = mApiClient.getRates(mBeerId);
@@ -113,7 +116,7 @@ public class RateItemAdapter extends RecyclerView.Adapter<RateItemViewHolder> {
         Last rate = this.mRates.get(position);
         // TODO bind view holder
         holder.getUsernameTv().setText(rate.getUsername());
-        holder.getRateTv().setText(rate.getRate());
+        holder.getRateTv().setText("" + rate.getRate());
         holder.getDateTv().setText(rate.getDate());
     }
 

@@ -2,6 +2,7 @@ package android.epsi.com.bebeer.activities.list;
 
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.activities.list.adapters.BeerListItemAdapter;
+import android.epsi.com.bebeer.services.image.ApiImageAccessor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +30,8 @@ public class BeerListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beer_list);
+
+        ApiImageAccessor.createInstance(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.beer_list_toolbar);
         setUpToolbar(toolbar);

@@ -1,5 +1,7 @@
 package android.epsi.com.bebeer.services.image;
 
+import android.content.Context;
+import android.epsi.com.bebeer.R;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -16,11 +18,12 @@ import java.io.InputStream;
 public class ApiImageAccessor {
 
     private static final String TAG = "ApiImageAccessor";
+    public static final String DEFAULT_ID = "default";
 
-    private static ApiImageAccessor mInstance = new ApiImageAccessor();
+    private static ApiImageAccessor mInstance;
     private final LruCache<String, Bitmap> mCache;
 
-    private ApiImageAccessor() {
+    private ApiImageAccessor(Context context) {
         int maxMemory = (int) (Runtime.getRuntime().maxMemory());
         int size = maxMemory / 8;
         mCache = new LruCache<String, Bitmap>(size) {
@@ -29,6 +32,8 @@ public class ApiImageAccessor {
                 return value.getByteCount() / 1024;
             }
         };
+        Bitmap bitMapDefault = BitmapFactory.decodeResource(context.getResources(), R.drawable.beer_default);
+        addBitmapToCache(DEFAULT_ID, bitMapDefault);
     }
 
     public static ApiImageAccessor getInstance() {
@@ -42,6 +47,9 @@ public class ApiImageAccessor {
      * @param imageUrl
      */
     public void displayImageToView(ImageView imageView, String imageUrl) {
+        if (imageUrl == null || "".equals(imageUrl)) {
+            imageUrl = DEFAULT_ID;
+        }
         Bitmap bitmap = this.getBitmapFromCache(imageUrl);
 
         if (bitmap == null) {
@@ -93,7 +101,6 @@ public class ApiImageAccessor {
                 InputStream in = new java.net.URL(mUrl).openStream();
                 bitMap = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
-
                 Log.e(TAG, "Error while fetching " + mUrl, e);
             }
             return bitMap;
@@ -101,10 +108,15 @@ public class ApiImageAccessor {
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
-            if (bitmap != null) {
-                mView.setImageBitmap(bitmap);
-                addBitmapToCache(mUrl, bitmap);
+            if (bitmap == null) {
+                bitmap = getBitmapFromCache(DEFAULT_ID);
             }
+            mView.setImageBitmap(bitmap);
+            addBitmapToCache(mUrl, bitmap);
         }
+    }
+
+    public static void createInstance(Context context) {
+        mInstance = new ApiImageAccessor(context);
     }
 }
