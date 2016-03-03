@@ -65,7 +65,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -224,13 +224,37 @@
 
                 </LinearLayout>
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/beer_rating"
+                    android:textStyle="bold" />
+
                 <RatingBar
                     android:id="@+id/beer_profile_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginTop="15dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/beer_my_rating"
+                    android:textStyle="bold" />
+
+                <RatingBar
+                    android:id="@+id/beer_profile_my_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="15dp" />
 
 
             </LinearLayout>
@@ -239,6 +263,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/beer_profile_comments_view"
             android:layout_width="match_parent"
+            app:reverseLayout="true"
             android:layout_height="wrap_content">
 
         </android.support.v7.widget.RecyclerView>

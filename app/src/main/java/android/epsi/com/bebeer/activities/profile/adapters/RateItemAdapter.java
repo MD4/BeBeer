@@ -116,7 +116,7 @@ public class RateItemAdapter extends RecyclerView.Adapter<RateItemViewHolder> {
         Last rate = this.mRates.get(position);
         // TODO bind view holder
         holder.getUsernameTv().setText(rate.getUsername());
-        holder.getRateTv().setText("" + rate.getRate());
+        holder.getRateTv().setRating(rate.getRate());
         holder.getDateTv().setText(rate.getDate());
     }
 
