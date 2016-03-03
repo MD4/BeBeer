@@ -171,6 +171,11 @@ public class BeerProfileActivity extends AppCompatActivity {
         TextView comment = (TextView) findViewById(R.id.beer_profile_comment);
         TextView fermentation = (TextView) findViewById(R.id.beer_profile_fermentation);
         TextView shortDesc = (TextView) findViewById(R.id.beer_profile_short_description);
+
+        TextView gradeTaste = (TextView) findViewById(R.id.beer_profile_taste);
+        TextView gradeThirsty = (TextView) findViewById(R.id.beer_profile_thirsty);
+        TextView gradeBitterness = (TextView) findViewById(R.id.beer_profile_bitterness);
+
         ImageView image = (ImageView) findViewById(R.id.beer_profile_beer_image);
         final RatingBar rating = (RatingBar) findViewById(R.id.beer_profile_rating);
 
@@ -182,7 +187,15 @@ public class BeerProfileActivity extends AppCompatActivity {
         comment.setText(beer.getComment());
         fermentation.setText(beer.getFermentation());
         shortDesc.setText(beer.getShortDescription());
+
+        gradeTaste.setText(beer.getGrades().getTaste().intValue() + "/5");
+        gradeThirsty.setText(beer.getGrades().getThirsty().intValue() + "/2");
+        gradeBitterness.setText(beer.getGrades().getBitterness().intValue() + "/2");
+
         rating.setMax(10);
+        rating.setStepSize(1);
+
+
 
         final ApiClient apiClient = new ApiClient(BeerProfileActivity.this);
 

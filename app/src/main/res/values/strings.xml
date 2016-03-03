@@ -28,5 +28,9 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
-    </string>iun p
+    </string>
+    <string name="beer_grades">Grades</string>
+    <string name="beer_taste">Taste</string>
+    <string name="beer_thirsty">Thirsty</string>
+    <string name="beer_bitterness">Bitterness</string>iun p
 </resources>
