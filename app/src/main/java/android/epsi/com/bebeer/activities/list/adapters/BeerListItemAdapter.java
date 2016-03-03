@@ -155,7 +155,7 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
         holder.getBrewery().setText(beer.getBrewery());
         holder.getCountry().setText(beer.getCountry());
 
-        mApiImageAccessor.displayImageToView(holder.getImage(), beer.getImage());
+        // mApiImageAccessor.displayImageToView(holder.getImage(), beer.getImage());
     }
 
     @Override
@@ -213,6 +213,6 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
     @Override
     public void onViewRecycled(BeerItemViewHolder holder) {
         super.onViewRecycled(holder);
-        holder.getImage().setImageBitmap(null);
+        //holder.getImage().setImageBitmap(null);
     }
 }
