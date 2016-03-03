@@ -199,7 +199,10 @@ public class BeerProfileActivity extends AppCompatActivity {
 
         rating.setMax(10);
         rating.setStepSize(1);
-        rating.setRating(beer.getRatings().getAverage().floatValue());
+
+        if (beer.getRatings() != null) {
+            rating.setRating(beer.getRatings().getAverage().floatValue());
+        }
 
 
         final ApiClient apiClient = new ApiClient(BeerProfileActivity.this);

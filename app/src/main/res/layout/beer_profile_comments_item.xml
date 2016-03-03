@@ -27,19 +27,19 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/beer_profile_comment_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/beer_profile_comment_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
-                    android:textStyle="italic"/>
-
-                <TextView
-                    android:id="@+id/beer_profile_comment_username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/app_name"
-                    android:textStyle="bold" />
+                    android:textStyle="italic"/>
             </LinearLayout>
 
             <LinearLayout

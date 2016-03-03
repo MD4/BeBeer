@@ -7,10 +7,13 @@ import android.epsi.com.bebeer.bean.Last;
 import android.epsi.com.bebeer.bean.Ratings;
 import android.epsi.com.bebeer.services.remote.ApiClient;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,6 +121,9 @@ public class RateItemAdapter extends RecyclerView.Adapter<RateItemViewHolder> {
         holder.getUsernameTv().setText(rate.getUsername());
         holder.getRateTv().setRating(rate.getRate());
         holder.getDateTv().setText(rate.getDate());
+
+        DateTime dateTime = new DateTime(rate.getDate());
+        holder.getDateTv().setText(DateUtils.getRelativeTimeSpanString(dateTime.getMillis()).toString());
     }
 
     @Override
