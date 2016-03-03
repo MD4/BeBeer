@@ -36,5 +36,6 @@
     <string name="beer_rating">Users review</string>
     <string name="beer_my_rating">My review</string>iun p
     <string name="user_profile_gravatar">user profile image</string>
-    <string name="title_activity_user_profile">UserProfile</string>iun p
+    <string name="title_activity_user_profile">UserProfile</string>
+    <string name="beer_last_rating">Last reviews</string>iun p
 </resources>

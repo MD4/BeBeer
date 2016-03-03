@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit.Call;
@@ -52,6 +55,13 @@ public class RateItemAdapter extends RecyclerView.Adapter<RateItemViewHolder> {
         if (ratings != null) {
             mRates.addAll(ratings.getLast());
         }
+
+        Collections.sort(mRates, new Comparator<Last>() {
+            @Override
+            public int compare(Last lhs, Last rhs) {
+                return rhs.getDate().compareTo(lhs.getDate());
+            }
+        });
 
         setUpData();
     }
