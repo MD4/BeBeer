@@ -60,8 +60,7 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
         mSearchHandler = new Handler();
 
         mApiImageAccessor = ApiImageAccessor.getInstance();
-
-        // Starting from 0, loading 20 items each request
+        // Starting from 0, loading 20 items each0 request
         setUpData(0, mCount);
     }
 
@@ -209,5 +208,11 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
         mBeers.clear();
         notifyDataSetChanged();
         setUpData(0, 20, null, null);
+    }
+
+    @Override
+    public void onViewRecycled(BeerItemViewHolder holder) {
+        super.onViewRecycled(holder);
+        holder.getImage().setImageBitmap(null);
     }
 }
