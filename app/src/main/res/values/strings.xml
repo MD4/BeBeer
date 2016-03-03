@@ -32,5 +32,7 @@
     <string name="beer_grades">Grades</string>
     <string name="beer_taste">Taste</string>
     <string name="beer_thirsty">Thirsty</string>
-    <string name="beer_bitterness">Bitterness</string>iun p
+    <string name="beer_bitterness">Bitterness</string>
+    <string name="beer_rating">Users review</string>
+    <string name="beer_my_rating">My review</string>iun p
 </resources>

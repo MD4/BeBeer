@@ -177,6 +177,7 @@ public class BeerProfileActivity extends AppCompatActivity {
         TextView gradeBitterness = (TextView) findViewById(R.id.beer_profile_bitterness);
 
         ImageView image = (ImageView) findViewById(R.id.beer_profile_beer_image);
+        final RatingBar myRating = (RatingBar) findViewById(R.id.beer_profile_my_rating);
         final RatingBar rating = (RatingBar) findViewById(R.id.beer_profile_rating);
 
         mApiImageAccessor.displayImageToView(image, beer.getImage());
@@ -192,23 +193,27 @@ public class BeerProfileActivity extends AppCompatActivity {
         gradeThirsty.setText(beer.getGrades().getThirsty().intValue() + "/2");
         gradeBitterness.setText(beer.getGrades().getBitterness().intValue() + "/2");
 
+        myRating.setMax(10);
+        myRating.setStepSize(1);
+
+
         rating.setMax(10);
         rating.setStepSize(1);
-
+        rating.setRating(beer.getRatings().getAverage().floatValue());
 
 
         final ApiClient apiClient = new ApiClient(BeerProfileActivity.this);
 
         // Add rate bar listener
-        rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        myRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float ratingValue, boolean fromUser) {
                 if (fromUser) {
-                    rating.setEnabled(false);
+                    myRating.setEnabled(false);
                     apiClient.rateBeer(beer.getId(), (int) ratingValue).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Response<Void> response, Retrofit retrofit) {
-                            rating.setEnabled(true);
+                            myRating.setEnabled(true);
                             if (!response.isSuccess()) {
                                 try {
                                     Log.d(TAG, "onResponse: " + response.errorBody().string());
@@ -219,7 +224,7 @@ public class BeerProfileActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Throwable t) {
-                            rating.setEnabled(true);
+                            myRating.setEnabled(true);
                             Log.e(TAG, "onFailure: ", t);
                         }
                     });
@@ -237,7 +242,7 @@ public class BeerProfileActivity extends AppCompatActivity {
             }
         }
         if (rate != null) {
-            rating.setRating(rate.getRate());
+            myRating.setRating(rate.getRate());
         }
 
 

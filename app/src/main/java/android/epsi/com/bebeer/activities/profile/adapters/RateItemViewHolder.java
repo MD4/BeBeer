@@ -3,6 +3,7 @@ package android.epsi.com.bebeer.activities.profile.adapters;
 import android.epsi.com.bebeer.R;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
@@ -11,14 +12,14 @@ import android.widget.TextView;
 public class RateItemViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView mUsernameTv;
-    private final TextView mRateTv;
+    private final RatingBar mRateTv;
     private final TextView mDateTv;
 
     public RateItemViewHolder(View itemView) {
         super(itemView);
 
         mUsernameTv = (TextView) itemView.findViewById(R.id.beer_profile_comment_username);
-        mRateTv = (TextView) itemView.findViewById(R.id.beer_profile_comment_rate);
+        mRateTv = (RatingBar) itemView.findViewById(R.id.beer_profile_comment_rate);
         mDateTv = (TextView) itemView.findViewById(R.id.beer_profile_comment_date);
     }
 
@@ -26,7 +27,7 @@ public class RateItemViewHolder extends RecyclerView.ViewHolder {
         return mUsernameTv;
     }
 
-    public TextView getRateTv() {
+    public RatingBar getRateTv() {
         return mRateTv;
     }
 
