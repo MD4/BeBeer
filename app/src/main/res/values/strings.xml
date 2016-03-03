@@ -35,4 +35,6 @@
     <string name="beer_bitterness">Bitterness</string>
     <string name="beer_rating">Users review</string>
     <string name="beer_my_rating">My review</string>iun p
+    <string name="user_profile_gravatar">user profile image</string>
+    <string name="title_activity_user_profile">UserProfile</string>iun p
 </resources>
