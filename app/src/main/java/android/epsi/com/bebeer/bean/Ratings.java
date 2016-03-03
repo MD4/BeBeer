@@ -11,7 +11,7 @@ public class Ratings {
 
     @SerializedName("average")
     @Expose
-    private Integer average;
+    private Double average;
     @SerializedName("last")
     @Expose
     private List<Last> last = new ArrayList<Last>();
@@ -19,14 +19,14 @@ public class Ratings {
     /**
      * @return The average
      */
-    public Integer getAverage() {
+    public Double getAverage() {
         return average;
     }
 
     /**
      * @param average The average
      */
-    public void setAverage(Integer average) {
+    public void setAverage(Double average) {
         this.average = average;
     }
 
