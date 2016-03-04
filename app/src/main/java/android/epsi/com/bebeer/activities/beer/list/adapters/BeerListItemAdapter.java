@@ -47,6 +47,8 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
     private Runnable mSearchRunnable;
     private ApiImageAccessor mApiImageAccessor;
 
+    private String breweryName;
+
     /**
      * Simple constructor
      *
@@ -74,11 +76,14 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
     private void setUpData(final int offset, int count, String search, final BeerItemViewHolder holder) {
         Log.i(TAG, "setUpData() called with: " + "offset = [" + offset + "], count = [" + count + "], search = [" + search + "], holder = [" + holder + "]");
         Call<List<Beer>> beers;
-        if (search != null && !search.equals("")) {
+        if (breweryName != null) {
+            beers = mApiClient.getBeersByBrewery(breweryName);
+        } else if (search != null && !search.equals("")) {
             beers = mApiClient.getBeers(offset, count, search);
         } else {
             beers = mApiClient.getBeers(offset, count);
         }
+
 
         beers.enqueue(new Callback<List<Beer>>() {
             @Override
@@ -214,5 +219,9 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
     public void onViewRecycled(BeerItemViewHolder holder) {
         super.onViewRecycled(holder);
         //holder.getImage().setImageBitmap(null);
+    }
+
+    public void setBreweryName(String name) {
+        this.breweryName = name;
     }
 }

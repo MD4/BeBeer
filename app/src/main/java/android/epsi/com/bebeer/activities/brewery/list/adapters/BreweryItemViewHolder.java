@@ -1,7 +1,9 @@
 package android.epsi.com.bebeer.activities.brewery.list.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.epsi.com.bebeer.R;
+import android.epsi.com.bebeer.activities.brewery.profile.BreweryProfilActivity;
 import android.epsi.com.bebeer.bean.Brewery;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -51,6 +53,9 @@ public class BreweryItemViewHolder extends RecyclerView.ViewHolder implements Vi
     @Override
     public void onClick(View v) {
         Log.d(TAG, "onClick() called with: " + "v = [" + v + "]");
+        Intent intent = new Intent(mActivity, BreweryProfilActivity.class);
+        intent.putExtra(BreweryProfilActivity.EXTRA_BREWERY_NAME, mBrewery.getName());
+        mActivity.startActivity(intent);
     }
 
     public TextView getName() {
