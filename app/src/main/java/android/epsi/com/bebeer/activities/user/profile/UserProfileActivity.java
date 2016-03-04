@@ -18,9 +18,9 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class UserProfile extends AppCompatActivity {
+public class UserProfileActivity extends AppCompatActivity {
 
-    private static final String TAG = "UserProfile";
+    private static final String TAG = "UserProfileActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class UserProfile extends AppCompatActivity {
             @Override
             public void onFailure(Throwable t) {
                 Log.e(TAG, "onFailure: ", t);
-                Toast.makeText(UserProfile.this, "Error while fetching user's data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserProfileActivity.this, "Error while fetching user's data", Toast.LENGTH_SHORT).show();
             }
         });
     }

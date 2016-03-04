@@ -51,7 +51,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.user.profile.UserProfile"
+            android:name=".activities.user.profile.UserProfileActivity"
             android:label="@string/title_activity_user_profile" />
     </application>
 
