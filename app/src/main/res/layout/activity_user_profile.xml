@@ -30,13 +30,8 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/user_profile_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
-
     <ListView
+        android:visibility="gone"
         android:id="@+id/user_profile_ratings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
