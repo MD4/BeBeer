@@ -3,7 +3,6 @@ package android.epsi.com.bebeer.activities.beer.profile;
 import android.content.Intent;
 import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.R;
-import android.epsi.com.bebeer.activities.beer.list.BeerListActivity;
 import android.epsi.com.bebeer.activities.beer.profile.adapters.RateItemAdapter;
 import android.epsi.com.bebeer.activities.user.login.LoginActivity;
 import android.epsi.com.bebeer.bean.Beer;
@@ -39,6 +38,10 @@ import retrofit.Retrofit;
 public class BeerProfileActivity extends AppCompatActivity {
 
     public static final String ACTION_VIEW_INTENT_URL = AppConfig.API_BASE_URL + "beers/";
+    /**
+     * Use for passing param to another activity
+     */
+    public static final String EXTRA_BEER_ID = "id";
     private static final String TAG = "BeerProfileActivity";
     private ApiImageAccessor mApiImageAccessor;
     private User mUser;
@@ -147,7 +150,7 @@ public class BeerProfileActivity extends AppCompatActivity {
      * @return Beer id if found, else -1
      */
     private String parseIntent(Intent intent) {
-        String beerId = intent.getStringExtra(BeerListActivity.EXTRA_BEER_ID);
+        String beerId = intent.getStringExtra(EXTRA_BEER_ID);
         if (beerId == null && intent.getData() != null) {
             String segment = intent.getData().getLastPathSegment();
             try {

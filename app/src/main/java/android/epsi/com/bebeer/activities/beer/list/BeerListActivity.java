@@ -20,10 +20,6 @@ import android.widget.ImageView;
  */
 public class BeerListActivity extends AppCompatActivity {
 
-    /**
-     * Use for passing param to another activity
-     */
-    public static final String EXTRA_BEER_ID = "id";
     private static final String TAG = "BeerListActivity";
 
     @Override
