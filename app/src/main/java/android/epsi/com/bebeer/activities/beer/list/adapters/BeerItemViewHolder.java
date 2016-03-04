@@ -3,7 +3,6 @@ package android.epsi.com.bebeer.activities.beer.list.adapters;
 import android.app.Activity;
 import android.content.Intent;
 import android.epsi.com.bebeer.R;
-import android.epsi.com.bebeer.activities.beer.list.BeerListActivity;
 import android.epsi.com.bebeer.activities.beer.profile.BeerProfileActivity;
 import android.epsi.com.bebeer.bean.Beer;
 import android.support.v7.widget.RecyclerView;
@@ -60,7 +59,7 @@ public class BeerItemViewHolder extends RecyclerView.ViewHolder implements View.
 
         // Launch BeerProfile activity with "beer.id" as a parameter
         Intent intent = new Intent(mActivity, BeerProfileActivity.class);
-        intent.putExtra(BeerListActivity.EXTRA_BEER_ID, mBeer.getId());
+        intent.putExtra(BeerProfileActivity.EXTRA_BEER_ID, mBeer.getId());
         mActivity.startActivity(intent);
     }
 

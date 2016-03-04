@@ -1,4 +1,4 @@
-package android.epsi.com.bebeer.activities.user.profile;
+package android.epsi.com.bebeer.activities.user.profile.adapters;
 
 import android.content.Context;
 import android.epsi.com.bebeer.R;
