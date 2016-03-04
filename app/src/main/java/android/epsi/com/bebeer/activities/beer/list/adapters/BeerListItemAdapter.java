@@ -1,4 +1,4 @@
-package android.epsi.com.bebeer.activities.list.adapters;
+package android.epsi.com.bebeer.activities.beer.list.adapters;
 
 import android.app.Activity;
 import android.epsi.com.bebeer.R;

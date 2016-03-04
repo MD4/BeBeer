@@ -1,15 +1,14 @@
-package android.epsi.com.bebeer.activities.list.adapters;
+package android.epsi.com.bebeer.activities.beer.list.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.epsi.com.bebeer.R;
-import android.epsi.com.bebeer.activities.list.BeerListActivity;
-import android.epsi.com.bebeer.activities.profile.BeerProfileActivity;
+import android.epsi.com.bebeer.activities.beer.list.BeerListActivity;
+import android.epsi.com.bebeer.activities.beer.profile.BeerProfileActivity;
 import android.epsi.com.bebeer.bean.Beer;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 

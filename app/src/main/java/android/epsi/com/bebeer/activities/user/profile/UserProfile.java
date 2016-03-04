@@ -1,4 +1,4 @@
-package android.epsi.com.bebeer.activities.account;
+package android.epsi.com.bebeer.activities.user.profile;
 
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.bean.User;
@@ -61,6 +61,8 @@ public class UserProfile extends AppCompatActivity {
         ProgressBar loaderView = (ProgressBar) findViewById(R.id.user_profile_progress);
         ListView listView = (ListView) findViewById(R.id.user_profile_ratings);
 
+//        ArrayAdapter<Rating> arrayAdapter = new ArrayAdapter<Rating>(t)
+// TODO finish it
         usernameView.setText(user.getUsername());
         emailView.setText(user.getEmail());
         ApiImageAccessor.createInstance(this);

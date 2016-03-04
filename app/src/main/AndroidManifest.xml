@@ -17,12 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.list.BeerListActivity"
+            android:name=".activities.beer.list.BeerListActivity"
             android:label="@string/title_activity_beer_list"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".activities.profile.BeerProfileActivity"
+            android:name=".activities.beer.profile.BeerProfileActivity"
             android:label="@string/title_activity_beer_profile"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.account.LoginActivity"
+            android:name=".activities.user.login.LoginActivity"
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +51,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.account.UserProfile"
+            android:name=".activities.user.profile.UserProfile"
             android:label="@string/title_activity_user_profile" />
     </application>
 

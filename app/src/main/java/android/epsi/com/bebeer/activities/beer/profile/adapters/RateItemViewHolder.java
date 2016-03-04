@@ -1,4 +1,4 @@
-package android.epsi.com.bebeer.activities.profile.adapters;
+package android.epsi.com.bebeer.activities.beer.profile.adapters;
 
 import android.epsi.com.bebeer.R;
 import android.support.v7.widget.RecyclerView;

@@ -1,8 +1,8 @@
-package android.epsi.com.bebeer.activities.account;
+package android.epsi.com.bebeer.activities.user.login;
 
 import android.content.Intent;
 import android.epsi.com.bebeer.R;
-import android.epsi.com.bebeer.activities.list.BeerListActivity;
+import android.epsi.com.bebeer.activities.beer.list.BeerListActivity;
 import android.epsi.com.bebeer.bean.User;
 import android.epsi.com.bebeer.services.remote.ApiClient;
 import android.os.Bundle;

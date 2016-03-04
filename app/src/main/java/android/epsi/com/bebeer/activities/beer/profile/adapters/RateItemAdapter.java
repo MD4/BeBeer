@@ -1,4 +1,4 @@
-package android.epsi.com.bebeer.activities.profile.adapters;
+package android.epsi.com.bebeer.activities.beer.profile.adapters;
 
 import android.content.Context;
 import android.epsi.com.bebeer.R;
@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;

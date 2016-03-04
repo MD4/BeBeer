@@ -1,7 +1,7 @@
-package android.epsi.com.bebeer.activities.list;
+package android.epsi.com.bebeer.activities.beer.list;
 
 import android.epsi.com.bebeer.R;
-import android.epsi.com.bebeer.activities.list.adapters.BeerListItemAdapter;
+import android.epsi.com.bebeer.activities.beer.list.adapters.BeerListItemAdapter;
 import android.epsi.com.bebeer.services.image.ApiImageAccessor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

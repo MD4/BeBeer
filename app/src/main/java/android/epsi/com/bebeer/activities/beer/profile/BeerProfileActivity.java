@@ -1,11 +1,11 @@
-package android.epsi.com.bebeer.activities.profile;
+package android.epsi.com.bebeer.activities.beer.profile;
 
 import android.content.Intent;
 import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.R;
-import android.epsi.com.bebeer.activities.account.LoginActivity;
-import android.epsi.com.bebeer.activities.list.BeerListActivity;
-import android.epsi.com.bebeer.activities.profile.adapters.RateItemAdapter;
+import android.epsi.com.bebeer.activities.beer.list.BeerListActivity;
+import android.epsi.com.bebeer.activities.beer.profile.adapters.RateItemAdapter;
+import android.epsi.com.bebeer.activities.user.login.LoginActivity;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Rating;
 import android.epsi.com.bebeer.bean.User;
