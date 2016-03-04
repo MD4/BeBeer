@@ -176,9 +176,9 @@ public class BeerProfileActivity extends AppCompatActivity {
         TextView fermentation = (TextView) findViewById(R.id.beer_profile_fermentation);
         TextView shortDesc = (TextView) findViewById(R.id.beer_profile_short_description);
 
-        TextView gradeTaste = (TextView) findViewById(R.id.beer_profile_taste);
-        TextView gradeThirsty = (TextView) findViewById(R.id.beer_profile_thirsty);
-        TextView gradeBitterness = (TextView) findViewById(R.id.beer_profile_bitterness);
+        RatingBar gradeTaste = (RatingBar) findViewById(R.id.beer_profile_taste);
+        RatingBar gradeThirsty = (RatingBar) findViewById(R.id.beer_profile_thirsty);
+        RatingBar gradeBitterness = (RatingBar) findViewById(R.id.beer_profile_bitterness);
 
         ImageView image = (ImageView) findViewById(R.id.beer_profile_beer_image);
         final RatingBar myRating = (RatingBar) findViewById(R.id.beer_profile_my_rating);
@@ -193,9 +193,15 @@ public class BeerProfileActivity extends AppCompatActivity {
         fermentation.setText(beer.getFermentation());
         shortDesc.setText(beer.getShortDescription());
 
-        gradeTaste.setText(beer.getGrades().getTaste().intValue() + "/5");
-        gradeThirsty.setText(beer.getGrades().getThirsty().intValue() + "/2");
-        gradeBitterness.setText(beer.getGrades().getBitterness().intValue() + "/2");
+        gradeTaste.setMax(10);
+        gradeThirsty.setMax(4);
+        gradeThirsty.setNumStars(2);
+        gradeBitterness.setMax(4);
+        gradeBitterness.setNumStars(2);
+
+        gradeTaste.setRating(beer.getGrades().getTaste().intValue());
+        gradeThirsty.setRating(beer.getGrades().getThirsty().intValue());
+        gradeBitterness.setRating(beer.getGrades().getBitterness().intValue());
 
         myRating.setMax(10);
         myRating.setStepSize(1);
