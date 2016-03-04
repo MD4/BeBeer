@@ -53,6 +53,10 @@
         <activity
             android:name=".activities.user.profile.UserProfileActivity"
             android:label="@string/title_activity_user_profile" />
+        <activity
+            android:name=".activities.brewery.list.BreweryListActivity"
+            android:label="@string/title_activity_brewery_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -38,5 +38,10 @@
     <string name="user_profile_gravatar">user profile image</string>
     <string name="title_activity_user_profile">UserProfile</string>
     <string name="beer_last_rating">Last reviews</string>
+
+    <string name="title_activity_brewery_list">Brewery_list</string>
+    <string name="brewery_list_search_label">Search</string>
+    <string name="brewery_list_search_clear_cd">Clear search</string>
+    <string name="beer_last_rating">Last reviews</string>
     <string name="last_reviews">Last reviews</string>iun p
 </resources>
