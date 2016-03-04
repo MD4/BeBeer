@@ -11,8 +11,8 @@
     tools:context="android.epsi.com.bebeer.activities.user.LoginActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/beer"/>
 
     <TextView
@@ -93,18 +93,6 @@
                 android:layout_gravity="center_horizontal">
 
                 <Button
-                    android:id="@+id/login_back"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="30dp"
-                    android:text="@string/login_back"
-                    android:visibility="gone"
-                    android:textStyle="bold" />
-
-                <Button
                     android:id="@+id/login_sign_in"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
@@ -124,6 +112,18 @@
                     android:layout_marginRight="40dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/login_sign_up"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/login_back"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/login_back"
+                    android:visibility="gone"
                     android:textStyle="bold" />
 
             </LinearLayout>
