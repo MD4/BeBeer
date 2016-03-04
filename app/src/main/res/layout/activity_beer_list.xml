@@ -31,6 +31,12 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true">
 
+                <Spinner
+                    android:id="@+id/list_menu_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/menu_entries" />
+
                 <EditText
                     android:id="@+id/beer_list_search_view"
                     android:layout_width="0dp"

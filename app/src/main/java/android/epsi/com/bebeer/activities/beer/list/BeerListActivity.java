@@ -2,6 +2,7 @@ package android.epsi.com.bebeer.activities.beer.list;
 
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.activities.beer.list.adapters.BeerListItemAdapter;
+import android.epsi.com.bebeer.services.OnItemSelectedMenuListener;
 import android.epsi.com.bebeer.services.image.ApiImageAccessor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,10 +14,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 /**
  * Show list of beers, quick search
- * TODO design better GUI, and animation from this activity to BeerProfileActivity
  */
 public class BeerListActivity extends AppCompatActivity {
 
@@ -28,6 +29,9 @@ public class BeerListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_beer_list);
 
         ApiImageAccessor.createInstance(this);
+
+        Spinner spinnerMenu = (Spinner) findViewById(R.id.list_menu_spinner);
+        setUpMenu(spinnerMenu);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.beer_list_toolbar);
         setUpToolbar(toolbar);
@@ -41,6 +45,15 @@ public class BeerListActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.beer_list_recycler);
         setUpRecyclerView(recyclerView, beerListItemAdapter);
 
+    }
+
+    /**
+     * Set up spinner menu
+     *
+     * @param menu
+     */
+    private void setUpMenu(Spinner menu) {
+        menu.setOnItemSelectedListener(new OnItemSelectedMenuListener(this, "Beers"));
     }
 
     /**
@@ -102,5 +115,12 @@ public class BeerListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(beerListItemAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Spinner menu = (Spinner) findViewById(R.id.list_menu_spinner);
+        menu.setSelection(0);
     }
 }

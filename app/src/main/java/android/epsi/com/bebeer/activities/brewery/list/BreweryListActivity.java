@@ -2,6 +2,7 @@ package android.epsi.com.bebeer.activities.brewery.list;
 
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.activities.brewery.list.adapters.BreweryListItemAdapter;
+import android.epsi.com.bebeer.services.OnItemSelectedMenuListener;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,10 +13,12 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 public class BreweryListActivity extends AppCompatActivity {
 
     private static final String TAG = "breweryListActivity";
+    private OnItemSelectedMenuListener mMenuListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,9 @@ public class BreweryListActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.brewery_list_toolbar);
         setSupportActionBar(toolbar);
+
+        Spinner menu = (Spinner) findViewById(R.id.list_menu_spinner);
+        setUpSpinnerMenu(menu);
 
         BreweryListItemAdapter breweryListItemAdapter = new BreweryListItemAdapter(this);
 
@@ -34,6 +40,17 @@ public class BreweryListActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.brewery_list_recycler);
         setUpRecyclerView(recyclerView, breweryListItemAdapter);
 
+    }
+
+    /**
+     * Set up menu spinner
+     *
+     * @param menu
+     */
+    private void setUpSpinnerMenu(Spinner menu) {
+        menu.setSelection(1);
+        mMenuListener = new OnItemSelectedMenuListener(this, "Breweries");
+        menu.setOnItemSelectedListener(mMenuListener);
     }
 
     /**
@@ -97,6 +114,13 @@ public class BreweryListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(breweryListItemAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Spinner menu = (Spinner) findViewById(R.id.list_menu_spinner);
+        menu.setSelection(1);
     }
 
 }

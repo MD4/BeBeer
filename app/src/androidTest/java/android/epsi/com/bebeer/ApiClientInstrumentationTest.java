@@ -2,7 +2,7 @@ package android.epsi.com.bebeer;
 
 import android.app.Instrumentation;
 import android.content.Context;
-import android.epsi.com.bebeer.activities.user.LoginActivity;
+import android.epsi.com.bebeer.activities.user.login.LoginActivity;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Brewery;
 import android.epsi.com.bebeer.bean.User;
