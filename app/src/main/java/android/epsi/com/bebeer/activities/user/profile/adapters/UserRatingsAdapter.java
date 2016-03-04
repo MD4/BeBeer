@@ -31,7 +31,7 @@ public class UserRatingsAdapter extends ArrayAdapter<Rating> {
             convertView = View.inflate(getContext(), R.layout.user_profile_rating_item, null);
         }
         Rating item = getItem(position);
-        final TextView beerId = (TextView) convertView.findViewById(R.id.user_profile_rating_item_beer_id);
+        final TextView beerName = (TextView) convertView.findViewById(R.id.user_profile_rating_item_beer_name);
         final TextView date = (TextView) convertView.findViewById(R.id.user_profile_rating_item_date);
         final RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.user_profile_rating_item_rate);
 
@@ -50,7 +50,7 @@ public class UserRatingsAdapter extends ArrayAdapter<Rating> {
 //            }
 //        });
 
-        beerId.setText(item.getBeerId());
+        beerName.setText(item.getBeerName());
         date.setText(DateUtils.getRelativeTimeSpanString(item.getDate().getMillis()));
         ratingBar.setRating(item.getRate());
 

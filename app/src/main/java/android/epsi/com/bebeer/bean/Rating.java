@@ -11,6 +11,9 @@ public class Rating {
     @SerializedName("beerId")
     @Expose
     private String beerId;
+    @SerializedName("beerName")
+    @Expose
+    private String beerName;
     @SerializedName("date")
     @Expose
     private DateTime date;
@@ -66,6 +69,15 @@ public class Rating {
                 "beerId='" + beerId + '\'' +
                 ", date=" + date +
                 ", rate=" + rate +
+                ", beerName=" + beerName +
                 '}';
+    }
+
+    public String getBeerName() {
+        return beerName;
+    }
+
+    public void setBeerName(String beerName) {
+        this.beerName = beerName;
     }
 }

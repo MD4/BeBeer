@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -95,6 +96,7 @@ public class UserProfileActivity extends AppCompatActivity implements AdapterVie
     private void bindUserToView(User user) {
         Log.i(TAG, "bindUserToView() called with: " + "user = [" + user + "]");
         TextView usernameView = (TextView) findViewById(R.id.user_profile_username);
+        LinearLayout contentView = (LinearLayout) findViewById(R.id.user_profile_content);
         ImageView gravatarView = (ImageView) findViewById(R.id.user_profile_gravatar);
         ProgressBar loaderView = (ProgressBar) findViewById(R.id.user_profile_progress);
         ListView listView = (ListView) findViewById(R.id.user_profile_ratings);
@@ -117,9 +119,7 @@ public class UserProfileActivity extends AppCompatActivity implements AdapterVie
         listView.setOnItemClickListener(this);
 
         loaderView.setVisibility(View.GONE);
-        gravatarView.setVisibility(View.VISIBLE);
-        usernameView.setVisibility(View.VISIBLE);
-        listView.setVisibility(View.VISIBLE);
+        contentView.setVisibility(View.VISIBLE);
     }
 
     @Override

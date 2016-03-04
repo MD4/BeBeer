@@ -15,27 +15,45 @@
         android:id="@+id/user_profile_progress"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:indeterminate="true" />
+        android:indeterminate="true"/>
 
-    <ImageView
-        android:id="@+id/user_profile_gravatar"
-        android:layout_width="135dp"
-        android:layout_height="135dp"
-        android:contentDescription="@string/user_profile_gravatar"
-        android:visibility="gone" />
+    <LinearLayout
+        android:id="@+id/user_profile_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:visibility="gone">
 
-    <TextView
-        android:id="@+id/user_profile_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        <ImageView
+            android:id="@+id/user_profile_gravatar"
+            android:layout_width="135dp"
+            android:layout_height="135dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/beer"
+            android:contentDescription="@string/user_profile_gravatar" />
 
-    <ListView
-        android:visibility="gone"
-        android:id="@+id/user_profile_ratings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/user_profile_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/app_name" />
 
-    </ListView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/last_reviews" />
+
+        <ListView
+            android:layout_marginTop="10dp"
+            android:id="@+id/user_profile_ratings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </LinearLayout>
