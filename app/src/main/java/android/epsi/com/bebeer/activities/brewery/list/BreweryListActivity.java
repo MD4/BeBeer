@@ -26,7 +26,7 @@ public class BreweryListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_brewery_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.brewery_list_toolbar);
-        setSupportActionBar(toolbar);
+        setUpToolbar(toolbar);
 
         Spinner menu = (Spinner) findViewById(R.id.list_menu_spinner);
         setUpSpinnerMenu(menu);
