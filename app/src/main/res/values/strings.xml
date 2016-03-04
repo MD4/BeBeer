@@ -41,9 +41,10 @@
     <string name="title_activity_brewery_list">Brewery_list</string>
     <string name="brewery_list_search_label">Search</string>
     <string name="brewery_list_search_clear_cd">Clear search</string>
-    <string name="title_activity_brewery_profil">BreweryProfilActivity</string>
+    <string name="title_activity_brewery_profil">Brewery profile</string>
     <string name="beer_last_rating">Last reviews</string>
-    <string name="last_reviews">Last reviews</string>iun p
+    <string name="last_reviews">Last reviews</string>
+    <string name="brewery_beers">Beers brewed:</string>iun p
 
     <string-array name="menu_entries">
         <item>Beers</item>
