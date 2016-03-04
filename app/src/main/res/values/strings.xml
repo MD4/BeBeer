@@ -34,7 +34,7 @@
     <string name="beer_thirsty">Thirsty</string>
     <string name="beer_bitterness">Bitterness</string>
     <string name="beer_rating">Users review</string>
-    <string name="beer_my_rating">My review</string>iun p
+    <string name="beer_my_rating">My review</string>
     <string name="user_profile_gravatar">user profile image</string>
     <string name="title_activity_user_profile">UserProfile</string>
 
@@ -44,8 +44,7 @@
     <string name="title_activity_brewery_profil">Brewery profile</string>
     <string name="beer_last_rating">Last reviews</string>
     <string name="last_reviews">Last reviews</string>
-    <string name="brewery_beers">Beers brewed:</string>iun p
-
+    <string name="brewery_beers">Beers brewed:</string>
     <string-array name="menu_entries">
         <item>Beers</item>
         <item>Breweries</item>

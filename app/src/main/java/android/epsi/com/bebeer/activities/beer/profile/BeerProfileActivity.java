@@ -254,6 +254,7 @@ public class BeerProfileActivity extends AppCompatActivity {
 
         ImageView shareBtn = (ImageView) findViewById(R.id.beer_profile_share_btn);
         setUpShareBtn(shareBtn, beer);
+        findViewById(R.id.beer_profile_container).setVisibility(View.VISIBLE);
         setUpCommentsList(beer);
     }
 
