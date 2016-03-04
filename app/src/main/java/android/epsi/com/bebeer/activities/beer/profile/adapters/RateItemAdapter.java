@@ -42,11 +42,13 @@ public class RateItemAdapter extends RecyclerView.Adapter<RateItemViewHolder> {
      * Context
      */
     private String mBeerId;
+    private Context mContext;
 
     /**
      * Simple constructor
      */
     public RateItemAdapter(Context context, Beer beer) {
+        mContext = context;
         mBeerId = beer.getId();
         mApiClient = new ApiClient(context);
         mRates = new ArrayList<>();
@@ -112,7 +114,7 @@ public class RateItemAdapter extends RecyclerView.Adapter<RateItemViewHolder> {
     public RateItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.beer_profile_comments_item, parent, false);
-        return new RateItemViewHolder(view);
+        return new RateItemViewHolder(view, mContext);
     }
 
     /**

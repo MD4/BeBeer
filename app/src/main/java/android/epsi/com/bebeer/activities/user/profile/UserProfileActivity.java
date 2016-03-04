@@ -1,5 +1,6 @@
 package android.epsi.com.bebeer.activities.user.profile;
 
+import android.content.Intent;
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.bean.User;
 import android.epsi.com.bebeer.services.image.ApiImageAccessor;
@@ -20,6 +21,7 @@ import retrofit.Retrofit;
 
 public class UserProfileActivity extends AppCompatActivity {
 
+    public static final String EXTRA_USER_ID = "username";
     private static final String TAG = "UserProfileActivity";
 
     @Override
@@ -27,26 +29,54 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
+        Intent intent = getIntent();
+        String usernameExtra = parseIntent(intent);
 
-        ApiClient mApiClient = new ApiClient(this);
-        mApiClient.isAuthenticated().enqueue(new Callback<User>() {
+        fetchUser(usernameExtra);
+    }
 
-            @Override
-            public void onResponse(Response<User> response, Retrofit retrofit) {
-                if (response.isSuccess()) {
-                    bindUserToView(response.body());
-                } else {
-                    Log.d(TAG, String.format("onResponse: response.code = %d", response.code()));
-
+    private void fetchUser(final String username) {
+        ApiClient apiClient = new ApiClient(this);
+        if (username == null || username.equals("")) {
+            apiClient.isAuthenticated().enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Response<User> response, Retrofit retrofit) {
+                    if (response.isSuccess()) {
+                        bindUserToView(response.body());
+                    } else {
+                        Log.i(TAG, "onResponse: code = " + response.code());
+                        Toast.makeText(UserProfileActivity.this, String.format("Can't fetch %s, sorry :(", username), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Throwable t) {
-                Log.e(TAG, "onFailure: ", t);
-                Toast.makeText(UserProfileActivity.this, "Error while fetching user's data", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Throwable t) {
+                    Log.e(TAG, String.format("onFailure: error while fetching user %s", username), t);
+                }
+            });
+        } else {
+            Log.i(TAG, String.format("fetchUser: %s", username));
+            apiClient.getUser(username).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Response<User> response, Retrofit retrofit) {
+                    if (response.isSuccess()) {
+                        bindUserToView(response.body());
+                    } else {
+                        Log.i(TAG, "onResponse: code = " + response.code());
+                        Toast.makeText(UserProfileActivity.this, String.format("Can't fetch %s, sorry :(", username), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                    Log.e(TAG, String.format("onFailure: error while fetching user %s", username), t);
+                }
+            });
+        }
+    }
+
+    private String parseIntent(Intent intent) {
+        return intent.getStringExtra(EXTRA_USER_ID);
     }
 
     /**

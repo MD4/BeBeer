@@ -43,7 +43,6 @@ public class BeerItemViewHolder extends RecyclerView.ViewHolder implements View.
         mName = (TextView) itemView.findViewById(R.id.beer_list_beer_card_name);
         mBrewery = (TextView) itemView.findViewById(R.id.beer_list_beer_card_brewery);
         mCountry = (TextView) itemView.findViewById(R.id.beer_list_beer_card_country);
-        //mImage = (ImageView) itemView.findViewById(R.id.beer_list_beer_card_img);
         mLoader = (ProgressBar) itemView.findViewById(R.id.beer_profile_card_loader);
 
         // Register event
@@ -84,8 +83,4 @@ public class BeerItemViewHolder extends RecyclerView.ViewHolder implements View.
     public ProgressBar getLoader() {
         return mLoader;
     }
-
-    /* public ImageView getImage() {
-        return mImage;
-    }*/
 }
