@@ -118,6 +118,8 @@
                     <TextView
                         android:id="@+id/beer_profile_brewery"
                         android:layout_width="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorAccent"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>

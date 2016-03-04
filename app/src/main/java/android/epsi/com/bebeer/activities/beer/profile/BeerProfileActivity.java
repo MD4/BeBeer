@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.epsi.com.bebeer.AppConfig;
 import android.epsi.com.bebeer.R;
 import android.epsi.com.bebeer.activities.beer.profile.adapters.RateItemAdapter;
+import android.epsi.com.bebeer.activities.brewery.profile.BreweryProfilActivity;
 import android.epsi.com.bebeer.activities.user.login.LoginActivity;
 import android.epsi.com.bebeer.bean.Beer;
 import android.epsi.com.bebeer.bean.Rating;
@@ -206,6 +207,15 @@ public class BeerProfileActivity extends AppCompatActivity {
         if (beer.getRatings() != null) {
             rating.setRating(beer.getRatings().getAverage().floatValue());
         }
+
+        brewery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BeerProfileActivity.this, BreweryProfilActivity.class);
+                intent.putExtra(BreweryProfilActivity.EXTRA_BREWERY_NAME, beer.getBrewery());
+                startActivity(intent);
+            }
+        });
 
 
         final ApiClient apiClient = new ApiClient(BeerProfileActivity.this);
