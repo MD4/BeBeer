@@ -38,8 +38,7 @@ public class BreweryProfilActivity extends AppCompatActivity {
     }
 
     private void setUpBeerList() {
-        BeerListItemAdapter beerListItemAdapter = new BeerListItemAdapter(this);
-        beerListItemAdapter.setBreweryName(breweryName);
+        BeerListItemAdapter beerListItemAdapter = new BeerListItemAdapter(this, breweryName);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.brewery_profil_content_beers);
         setUpRecyclerView(recyclerView, beerListItemAdapter);
     }

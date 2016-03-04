@@ -55,6 +55,11 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
      * @param activity Context
      */
     public BeerListItemAdapter(Activity activity) {
+        this(activity, null);
+    }
+
+    public BeerListItemAdapter(Activity activity, String breweryName) {
+        this.breweryName = breweryName;
         mApiClient = new ApiClient(activity.getApplicationContext());
         mActivity = activity;
         mBeers = new ArrayList<>();
@@ -77,11 +82,14 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
         Log.i(TAG, "setUpData() called with: " + "offset = [" + offset + "], count = [" + count + "], search = [" + search + "], holder = [" + holder + "]");
         Call<List<Beer>> beers;
         if (breweryName != null) {
+            Log.d(TAG, "breweryName: " + breweryName);
             beers = mApiClient.getBeersByBrewery(breweryName);
         } else if (search != null && !search.equals("")) {
             beers = mApiClient.getBeers(offset, count, search);
+            Log.d(TAG, "beer");
         } else {
             beers = mApiClient.getBeers(offset, count);
+            Log.d(TAG, "beer");
         }
 
 
@@ -149,7 +157,7 @@ public class BeerListItemAdapter extends RecyclerView.Adapter<BeerItemViewHolder
     @Override
     public void onBindViewHolder(BeerItemViewHolder holder, int position) {
         Log.i(TAG, "onBindViewHolder() called with: " + "holder = [" + holder + "], position = [" + position + "]");
-        if (position == (mBeers.size() - 1)) {
+        if (position == (mBeers.size() - 1) && breweryName == null) {
             holder.getLoader().setVisibility(View.VISIBLE);
             setUpData(position + 1, mCount, mSearch, holder);
         }
