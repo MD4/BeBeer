@@ -49,6 +49,13 @@ interface ApiInterface {
                                      @Query("count") int count,
                                      @Query("name") String name);
 
+    @GET("/breweries/{id}")
+    Call<Brewery> getBrewery(@Path("id") String name);
+
+    @GET("/breweries/{id}/beers")
+    Call<List<Beer>> getBeersByBrewery(@Path("id") String name);
+
+
     @GET("/users/{id}")
     Call<User> getUser(@Path("id") String id);
 

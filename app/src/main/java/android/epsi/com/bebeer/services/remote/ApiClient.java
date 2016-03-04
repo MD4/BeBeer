@@ -82,6 +82,28 @@ public class ApiClient {
     }
 
     /**
+     * get a brewery with is ame
+     * @param name
+     * @return
+     */
+    public Call<Brewery> getBrewery(String name) {
+        Log.i(TAG, "getBrewery() called with: " + "name = [" + name + "]");
+        return mApi.getBrewery(name);
+    }
+
+    /**
+     * list beers for a brewery
+     *
+     * @param name
+     * @return
+     */
+    public Call<List<Beer>> getBeersByBrewery(String name) {
+        Log.i(TAG, "getBeersByBrewery() called with: " + "name = [" + name + "]");
+        return mApi.getBeersByBrewery(name);
+    }
+
+
+    /**
      * List beers, paginated with search query
      *
      * @return promise-like object
