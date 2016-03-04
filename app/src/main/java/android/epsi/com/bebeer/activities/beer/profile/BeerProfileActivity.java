@@ -55,6 +55,9 @@ public class BeerProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ApiClient apiClient = new ApiClient(this);
+        if (ApiImageAccessor.getInstance() == null) {
+            ApiImageAccessor.createInstance(this);
+        }
         mApiImageAccessor = ApiImageAccessor.getInstance();
         setUpUser(apiClient);
 
@@ -241,6 +244,8 @@ public class BeerProfileActivity extends AppCompatActivity {
                                     Log.d(TAG, "onResponse: " + response.errorBody().string());
                                 } catch (IOException ignored) {
                                 }
+                            } else {
+                                setUpBeerView(getIntent(), new ApiClient(BeerProfileActivity.this));
                             }
                         }
 
