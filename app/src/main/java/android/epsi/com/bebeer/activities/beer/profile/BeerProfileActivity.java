@@ -244,8 +244,6 @@ public class BeerProfileActivity extends AppCompatActivity {
                                     Log.d(TAG, "onResponse: " + response.errorBody().string());
                                 } catch (IOException ignored) {
                                 }
-                            } else {
-                                setUpBeerView(getIntent(), new ApiClient(BeerProfileActivity.this));
                             }
                         }
 
